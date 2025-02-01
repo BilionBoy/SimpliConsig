@@ -35,8 +35,12 @@ body {
   border-color: var(--secondary-hover);
 }
 
+.nav-link {
+  color: white;
+}
 .navbar {
   transition: all 0.3s ease;
+  background-color: #fa6300;
 }
 
 .navbar-scrolled {
