@@ -1,0 +1,101 @@
+.hand-pointer,
+.nav-item,
+.hand-pointer:hover,
+.nav-item:hover {
+  cursor: pointer;
+}
+
+.sort_link,
+.sort_link:hover {
+  text-decoration: none;
+  color: var(
+    --bs-table-color-state,
+    var(--bs-table-color-type, var(--bs-table-color))
+  );
+}
+
+.keyup {
+  text-transform: uppercase;
+}
+
+.downcase {
+  text-transform: lowercase;
+}
+
+.select2-container.is-invalid .select2-selection {
+  border-color: #dc3545;
+}
+
+.steps-basic > .actions {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background: var(--light);
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+  border-top: var(--card-border-width) solid var(--card-border-color);
+}
+
+.select2-container.is-valid .select2-selection {
+  border-color: #28a745;
+}
+
+.select2-container.is-invalid .select2-selection:focus {
+  /* Sombra vermelha */
+  box-shadow: 0 0 0 0.125rem rgba(239, 68, 68, 0.25);
+}
+
+.select2-container.is-valid .select2-selection:focus {
+  /* Sombra verde */
+  box-shadow: 0 0 0 0.125rem rgba(5, 150, 105, 0.25);
+}
+
+abbr {
+  color: var(--danger);
+}
+
+.btn-to-top {
+  position: absolute;
+  bottom: 4.1rem;
+  right: 1.2rem;
+}
+
+/* Estilo para impressão */
+@media print {
+  /* Elementos que você deseja ocultar na impressão */
+  .sidebar,
+  .navbar,
+  title,
+  .no-print {
+    display: none !important; /* ou visibility: hidden; */
+  }
+}
+
+.table > :not(caption) > * > * {
+  padding: 0.45rem 1rem !important;
+}
+
+.table-responsive {
+  /* Se você quer que o conteúdo interno não quebre linhas */
+  white-space: nowrap;
+  /* Defina a largura máxima conforme necessário */
+  max-width: 100%;
+  /* Impede a rolagem vertical */
+  overflow-y: hidden;
+}
+
+.accordion-button {
+  color: white;
+  background-color: #247297;
+  border-color: white;
+}
+
+.accordion-button:not(.collapsed) {
+  color: white;
+  background-color: #1a6a8d;
+  border-color: white;
+}
+.accordion-button::after {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
+}
