@@ -1,4 +1,253 @@
-<div class="container-fluid">
+<div class="page-header page-header-light shadow-sm" style="background-color: #052b43;">
+  <div class="page-header-content d-lg-flex">
+    <div class="d-flex">
+      <div class="breadcrumb py-2">
+        <a href="<%= admin_index_path %>" class="breadcrumb-item">
+          <i data-lucide="home" style="width: 16px; height: 16px;"></i>
+        </a>
+        <span class="breadcrumb-item active">Dashboard</span>
+      </div>
+    </div>
+  </div>
+  
+</div>
+<div class="content">
+  <!-- Cards de Estatísticas -->
   <div class="row">
-    <h1>Olá</h1>
+    <div class="col-sm-6 col-xl-3">
+      <div class="card card-body bg-primary text-white">
+        <div class="d-flex align-items-center">
+          <div class="flex-fill">
+            <h3 class="mb-0">1.247</h3>
+            <span class="text-white-75">Total de Clientes</span>
+          </div>
+          <div class="ms-3">
+            <i data-lucide="users" style="width: 32px; height: 32px; opacity: 0.7;"></i>
+          </div>
+        </div>
+        <div class="mt-3">
+          <span class="badge bg-white bg-opacity-20">
+            <i data-lucide="trending-up" style="width: 12px; height: 12px;"></i>
+            +12% este mês
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+      <div class="card card-body bg-success text-white">
+        <div class="d-flex align-items-center">
+          <div class="flex-fill">
+            <h3 class="mb-0">R$ 2.847.230</h3>
+            <span class="text-white-75">Volume Consignado</span>
+          </div>
+          <div class="ms-3">
+            <i data-lucide="banknote" style="width: 32px; height: 32px; opacity: 0.7;"></i>
+          </div>
+        </div>
+        <div class="mt-3">
+          <span class="badge bg-white bg-opacity-20">
+            <i data-lucide="trending-up" style="width: 12px; height: 12px;"></i>
+            +8.5% este mês
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+      <div class="card card-body bg-warning text-white">
+        <div class="d-flex align-items-center">
+          <div class="flex-fill">
+            <h3 class="mb-0">89</h3>
+            <span class="text-white-75">Contratos Pendentes</span>
+          </div>
+          <div class="ms-3">
+            <i data-lucide="clock" style="width: 32px; height: 32px; opacity: 0.7;"></i>
+          </div>
+        </div>
+        <div class="mt-3">
+          <span class="badge bg-white bg-opacity-20">
+            <i data-lucide="alert-circle" style="width: 12px; height: 12px;"></i>
+            Requer atenção
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+      <div class="card card-body bg-info text-white">
+        <div class="d-flex align-items-center">
+          <div class="flex-fill">
+            <h3 class="mb-0">R$ 47.892</h3>
+            <span class="text-white-75">Comissões do Mês</span>
+          </div>
+          <div class="ms-3">
+            <i data-lucide="credit-card" style="width: 32px; height: 32px; opacity: 0.7;"></i>
+          </div>
+        </div>
+        <div class="mt-3">
+          <span class="badge bg-white bg-opacity-20">
+            <i data-lucide="trending-up" style="width: 12px; height: 12px;"></i>
+            +15.2% este mês
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Gráficos e Tabelas -->
+  <div class="row">
+    <!-- Tabela de Contratos Recentes -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header d-flex align-items-center">
+            <h5 class="mb-0">
+              <i data-lucide="file-text" style="width: 20px; height: 20px;"></i>
+              Contratos Recentes
+            </h5>
+            <div class="ms-auto">
+              <a href="#" class="btn btn-primary btn-sm">
+                <i data-lucide="plus" style="width: 14px; height: 14px;"></i>
+                Novo Contrato
+              </a>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Cliente</th>
+                    <th>Valor</th>
+                    <th>Parcelas</th>
+                    <th>Status</th>
+                    <th>Data</th>
+                    <th class="text-center">Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <div class="bg-primary bg-opacity-10 text-primary rounded-circle p-2 me-3">
+                          <i data-lucide="user" style="width: 16px; height: 16px;"></i>
+                        </div>
+                        <div>
+                          <div class="fw-semibold">Carlos Oliveira</div>
+                          <div class="text-muted small">carlos@email.com</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="fw-semibold">R$ 15.000,00</td>
+                    <td>84x</td>
+                    <td>
+                      <span class="badge bg-success">Aprovado</span>
+                    </td>
+                    <td>25/01/2024</td>
+                    <td class="text-center">
+                      <div class="dropdown">
+                        <button type="button" class="btn btn-light btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+                          <i data-lucide="more-horizontal" style="width: 14px; height: 14px;"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                          <a href="#" class="dropdown-item">
+                            <i data-lucide="eye" style="width: 14px; height: 14px;"></i>
+                            Visualizar
+                          </a>
+                          <a href="#" class="dropdown-item">
+                            <i data-lucide="edit" style="width: 14px; height: 14px;"></i>
+                            Editar
+                          </a>
+                          <a href="#" class="dropdown-item">
+                            <i data-lucide="download" style="width: 14px; height: 14px;"></i>
+                            Download
+                          </a>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <div class="bg-success bg-opacity-10 text-success rounded-circle p-2 me-3">
+                          <i data-lucide="user" style="width: 16px; height: 16px;"></i>
+                        </div>
+                        <div>
+                          <div class="fw-semibold">Fernanda Lima</div>
+                          <div class="text-muted small">fernanda@email.com</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="fw-semibold">R$ 8.500,00</td>
+                    <td>60x</td>
+                    <td>
+                      <span class="badge bg-warning">Pendente</span>
+                    </td>
+                    <td>24/01/2024</td>
+                    <td class="text-center">
+                      <div class="dropdown">
+                        <button type="button" class="btn btn-light btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+                          <i data-lucide="more-horizontal" style="width: 14px; height: 14px;"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                          <a href="#" class="dropdown-item">
+                            <i data-lucide="eye" style="width: 14px; height: 14px;"></i>
+                            Visualizar
+                          </a>
+                          <a href="#" class="dropdown-item">
+                            <i data-lucide="edit" style="width: 14px; height: 14px;"></i>
+                            Editar
+                          </a>
+                          <a href="#" class="dropdown-item">
+                            <i data-lucide="download" style="width: 14px; height: 14px;"></i>
+                            Download
+                          </a>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <div class="bg-info bg-opacity-10 text-info rounded-circle p-2 me-3">
+                          <i data-lucide="user" style="width: 16px; height: 16px;"></i>
+                        </div>
+                        <div>
+                          <div class="fw-semibold">Roberto Silva</div>
+                          <div class="text-muted small">roberto@email.com</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="fw-semibold">R$ 22.000,00</td>
+                    <td>96x</td>
+                    <td>
+                      <span class="badge bg-primary">Em Análise</span>
+                    </td>
+                    <td>23/01/2024</td>
+                    <td class="text-center">
+                      <div class="dropdown">
+                        <button type="button" class="btn btn-light btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+                          <i data-lucide="more-horizontal" style="width: 14px; height: 14px;"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                          <a href="#" class="dropdown-item">
+                            <i data-lucide="eye" style="width: 14px; height: 14px;"></i>
+                            Visualizar
+                          </a>
+                          <a href="#" class="dropdown-item">
+                            <i data-lucide="edit" style="width: 14px; height: 14px;"></i>
+                            Editar
+                          </a>
+                          <a href="#" class="dropdown-item">
+                            <i data-lucide="download" style="width: 14px; height: 14px;"></i>
+                            Download
+                          </a>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>

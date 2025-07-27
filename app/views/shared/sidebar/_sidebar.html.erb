@@ -1,66 +1,67 @@
-<div class="sidebar sidebar-dark sidebar-main sidebar-expand-xl" style="background: #052b43;
-;">
+<div class="sidebar sidebar-dark sidebar-main sidebar-expand-xl" id="sidebar" style="background-color: #052b43;">
   <div class="sidebar-content">
-    <div class="sidebar-section">
-      <div class="sidebar-section-body d-flex justify-content-center">
-        <h5 class="sidebar-resize-hide flex-grow-1 my-auto"><b>Menu</b></h5>
+    <div class="sidebar-section border-bottom border-white border-opacity-10 pb-2 mb-2">
+      <div class="sidebar-section-body d-flex justify-content-between align-items-center">
+        <h5 class="sidebar-resize-hide my-auto text-white"><b>Menu</b></h5>
         <div>
           <button
             type="button"
             class="btn btn-flat-white btn-icon btn-sm rounded-pill border-transparent sidebar-mobile-main-toggle d-xl-none"
           >
-            <i class="ph-x"></i>
+            <i class="ph-x fs-5"></i>
           </button>
-        </div>
-      </div>
-    </div>
-    <!-- Barra de pesquisa -->
-    <div class="sidebar-section-body">
-      <div class="form-control-feedback form-control-feedback-end">
-        <input
-          type="search"
-          id="sidebar-search-input"
-          class="form-control"
-          placeholder="Pesquisar"
-          onkeyup="filterSidebar()"
-        />
-        <div class="form-control-feedback-icon">
-          <i class="ph-magnifying-glass opacity-50"></i>
         </div>
       </div>
     </div>
     <!-- Itens da sidebar -->
     <div class="sidebar-section">
       <ul class="nav nav-sidebar" data-nav-type="accordion" id="sidebar-items">
-        <li class="nav-item"></li>
-          <a href="<%= root_path %>" class="nav-link" id="config-link" data-no-close>
-            <i class="ph-house"></i>
-            <span>Home</span>
+        <li class="nav-item border-bottom border-white border-opacity-10">
+          <a href="<%= root_path %>" class="nav-link py-3 px-3 fs-6 d-flex align-items-center" id="config-link" data-no-close>
+            <i class="bi-house-fill me-3 fs-5"></i>
+            <span class="fw-semibold">Home</span>
+          </a>
+        </li>
+        <li class="nav-item border-bottom border-white border-opacity-10">
+          <a href="#" class="nav-link py-3 px-3 fs-6 d-flex align-items-center">
+            <i class="bi-person-badge-fill me-3 fs-5"></i>
+            <span class="fw-semibold">Clientes</span>
+          </a>
+        </li>
+        <li class="nav-item border-bottom border-white border-opacity-10">
+          <a href="#" class="nav-link py-3 px-3 fs-6 d-flex align-items-center">
+            <i class="bi-file-earmark-text-fill me-3 fs-5"></i>
+            <span class="fw-semibold">Contratos</span>
+          </a>
+        </li>
+        <li class="nav-item border-bottom border-white border-opacity-10">
+          <a href="#" class="nav-link py-3 px-3 fs-6 d-flex align-items-center">
+            <i class="bi-bank me-3 fs-5"></i>
+            <span class="fw-semibold">Bancos</span>
           </a>
         </li>
       </ul>
     </div>
   </div>
 </div>
+<script>
+  function filterSidebar() {
+    const input = document.getElementById('sidebar-search-input');
+    const filter = input.value.toLowerCase();
+    const navItems = document.querySelectorAll('#sidebar-items .nav-item, #sidebar-items .nav-item-header');
 
-  <script>
-    function filterSidebar() {
-      const input = document.getElementById('sidebar-search-input');
-      const filter = input.value.toLowerCase();
-      const navItems = document.querySelectorAll('#sidebar-items .nav-item, #sidebar-items .nav-item-header');
+    navItems.forEach(item => {
+      const text = item.textContent.toLowerCase();
+      const isCollapsible = item.querySelector('.nav-group-sub');
 
-      navItems.forEach(item => {
-        const text = item.textContent.toLowerCase();
-        const isCollapsible = item.querySelector('.nav-group-sub');
-
-        if (text.includes(filter)) {
-          item.style.display = ''; // Mostra o item
-          if (isCollapsible) {
-            isCollapsible.classList.add('show'); // Abre a seção colapsável
-          }
-        } else {
-          item.style.display = 'none'; // Oculta o item
+      if (text.includes(filter)) {
+        item.style.display = ''; // Mostra o item
+        if (isCollapsible) {
+          isCollapsible.classList.add('show'); // Abre a seção colapsável
         }
-      });
-    }
-  </script>
+      } else {
+        item.style.display = 'none'; // Oculta o item
+      }
+    });
+  }
+</script>

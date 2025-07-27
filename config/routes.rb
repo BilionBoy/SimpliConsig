@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :produtos
+  resources :posts
   root 'admin#index'
   get 'admin/index'
   get 'home/index'
