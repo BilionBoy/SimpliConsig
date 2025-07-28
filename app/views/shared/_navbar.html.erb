@@ -30,3 +30,20 @@
 </div>
 <!-- LINHA DIVISORA COM SOMBRA -->
 <div class="navbar-divider-shadow"></div>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const userMenuToggle = document.getElementById('userMenuToggle');
+    const userMenu = document.getElementById('userMenu');
+
+    userMenuToggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      userMenu.style.display = userMenu.style.display === 'block' ? 'none' : 'block';
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!userMenu.contains(e.target) && !userMenuToggle.contains(e.target)) {
+        userMenu.style.display = 'none';
+      }
+    });
+  });
+</script>
