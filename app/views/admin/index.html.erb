@@ -1,213 +1,225 @@
+<div class="modern-dashboard">
   <!-- Header moderno -->
-<div class="page-header modern-header shadow-sm">
-  <div class="page-header-content d-lg-flex">
-    <div class="d-flex">
-      <div class="breadcrumb modern-breadcrumb py-3">
-        <a href="<%= admin_index_path %>" class="breadcrumb-item">
-          <i data-lucide="home" style="width: 16px; height: 16px;"></i>
+  <div class="page-header modern-header shadow-sm">
+    <div class="page-header-content d-lg-flex">
+      <div class="d-flex">
+        <div class="breadcrumb modern-breadcrumb py-3">
+          <a href="<%= admin_index_path %>" class="breadcrumb-item">
+            <i data-lucide="home" style="width: 16px; height: 16px;"></i>
+          </a>
+          <span class="breadcrumb-item active">Dashboard</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content" style="padding: 32px 24px;">
+    <!-- Cards de Estatísticas Modernos -->
+    <div class="stats-grid">
+      <div class="stat-card primary">
+        <div class="stat-icon-value">
+          <div class="stat-icon primary">
+            <i data-lucide="users" style="width: 24px; height: 24px;"></i>
+          </div>
+          <div class="stat-value">1.247</div>
+        </div>
+        <div class="stat-label">Total de Clientes</div>
+        <div class="stat-badge positive">
+          <i data-lucide="trending-up" style="width: 12px; height: 12px;"></i>
+          +12% este mês
+        </div>
+      </div>
+      <div class="stat-card success">
+        <div class="stat-icon-value">
+          <div class="stat-icon success">
+            <i data-lucide="banknote" style="width: 24px; height: 24px;"></i>
+          </div>
+          <div class="stat-value">50%</div>
+        </div>
+        <div class="stat-label">Metas Alcançadas</div>
+        <div class="stat-badge positive">
+          <i data-lucide="trending-up" style="width: 12px; height: 12px;"></i>
+          +8.5% este mês
+        </div>
+      </div>
+      <div class="stat-card warning">
+        <div class="stat-icon-value">
+          <div class="stat-icon warning">
+            <i data-lucide="clock" style="width: 24px; height: 24px;"></i>
+          </div>
+          <div class="stat-value">89</div>
+        </div>
+        <div class="stat-label">Contratos Pendentes</div>
+        <div class="stat-badge attention">
+          <i data-lucide="alert-circle" style="width: 12px; height: 12px;"></i>
+          Requer atenção
+        </div>
+      </div>
+      <div class="stat-card accent">
+        <div class="stat-icon-value">
+          <div class="stat-icon accent">
+            <i data-lucide="credit-card" style="width: 24px; height: 24px;"></i>
+          </div>
+          <div class="stat-value">R$ 1.300</div>
+        </div>
+        <div class="stat-label">Comissões do Mês</div>
+        <div class="stat-badge positive">
+          <i data-lucide="trending-up" style="width: 12px; height: 12px;"></i>
+          +15.2% este mês
+        </div>
+      </div>
+    </div>
+    <!-- Tabela de Contratos Modernizada -->
+    <div class="modern-card">
+      <div class="modern-card-header d-flex align-items-center justify-content-between">
+        <h5 class="modern-card-title">
+          <i data-lucide="file-text" style="width: 20px; height: 20px;"></i>
+          Contratos Recentes
+        </h5>
+        <a href="#" class="modern-btn modern-btn-accent">
+          <i data-lucide="plus" style="width: 16px; height: 16px;"></i>
+          Novo Contrato
         </a>
-        <span class="breadcrumb-item active">Dashboard</span>
+      </div>
+      <div class="table-responsive">
+        <table class="modern-table">
+          <thead>
+            <tr>
+              <th>Cliente</th>
+              <th>Valor</th>
+              <th>Parcelas</th>
+              <th>Status</th>
+              <th>Data</th>
+              <th style="text-align: center;">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="d-flex align-items-center">
+                  <div class="user-avatar" style="background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);">
+                    CO
+                  </div>
+                  <div>
+                    <div style="font-weight: 600; color: var(--neutral-900); margin-bottom: 2px;">Carlos Oliveira</div>
+                    <div style="color: var(--neutral-500); font-size: 13px;">carlos@email.com</div>
+                  </div>
+                </div>
+              </td>
+              <td style="font-weight: 600; color: var(--neutral-900);">R$ 15.000,00</td>
+              <td style="color: var(--neutral-600);">84x</td>
+              <td><span class="status-badge approved">Aprovado</span></td>
+              <td style="color: var(--neutral-600);">25/01/2024</td>
+              <td style="text-align: center;">
+                <div class="dropdown">
+                  <button type="button" class="action-btn dropdown-toggle" data-bs-toggle="dropdown">
+                    <i data-lucide="more-horizontal" style="width: 16px; height: 16px;"></i>
+                  </button>
+                  <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item">
+                      <i data-lucide="eye" style="width: 16px; height: 16px;"></i>
+                      Visualizar
+                    </a>
+                    <a href="#" class="dropdown-item">
+                      <i data-lucide="edit" style="width: 16px; height: 16px;"></i>
+                      Editar
+                    </a>
+                    <a href="#" class="dropdown-item">
+                      <i data-lucide="download" style="width: 16px; height: 16px;"></i>
+                      Download
+                    </a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="d-flex align-items-center">
+                  <div class="user-avatar" style="background: linear-gradient(135deg, var(--success) 0%, #34D399 100%);">
+                    FL
+                  </div>
+                  <div>
+                    <div style="font-weight: 600; color: var(--neutral-900); margin-bottom: 2px;">Fernanda Lima</div>
+                    <div style="color: var(--neutral-500); font-size: 13px;">fernanda@email.com</div>
+                  </div>
+                </div>
+              </td>
+              <td style="font-weight: 600; color: var(--neutral-900);">R$ 8.500,00</td>
+              <td style="color: var(--neutral-600);">60x</td>
+              <td><span class="status-badge pending">Pendente</span></td>
+              <td style="color: var(--neutral-600);">24/01/2024</td>
+              <td style="text-align: center;">
+                <div class="dropdown">
+                  <button type="button" class="action-btn dropdown-toggle" data-bs-toggle="dropdown">
+                    <i data-lucide="more-horizontal" style="width: 16px; height: 16px;"></i>
+                  </button>
+                  <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item">
+                      <i data-lucide="eye" style="width: 16px; height: 16px;"></i>
+                      Visualizar
+                    </a>
+                    <a href="#" class="dropdown-item">
+                      <i data-lucide="edit" style="width: 16px; height: 16px;"></i>
+                      Editar
+                    </a>
+                    <a href="#" class="dropdown-item">
+                      <i data-lucide="download" style="width: 16px; height: 16px;"></i>
+                      Download
+                    </a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="d-flex align-items-center">
+                  <div class="user-avatar" style="background: linear-gradient(135deg, var(--accent-orange) 0%, #FF8A65 100%);">
+                    RS
+                  </div>
+                  <div>
+                    <div style="font-weight: 600; color: var(--neutral-900); margin-bottom: 2px;">Roberto Silva</div>
+                    <div style="color: var(--neutral-500); font-size: 13px;">roberto@email.com</div>
+                  </div>
+                </div>
+              </td>
+              <td style="font-weight: 600; color: var(--neutral-900);">R$ 22.000,00</td>
+              <td style="color: var(--neutral-600);">96x</td>
+              <td><span class="status-badge analysis">Em Análise</span></td>
+              <td style="color: var(--neutral-600);">23/01/2024</td>
+              <td style="text-align: center;">
+                <div class="dropdown">
+                  <button type="button" class="action-btn dropdown-toggle" data-bs-toggle="dropdown">
+                    <i data-lucide="more-horizontal" style="width: 16px; height: 16px;"></i>
+                  </button>
+                  <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item">
+                      <i data-lucide="eye" style="width: 16px; height: 16px;"></i>
+                      Visualizar
+                    </a>
+                    <a href="#" class="dropdown-item">
+                      <i data-lucide="edit" style="width: 16px; height: 16px;"></i>
+                      Editar
+                    </a>
+                    <a href="#" class="dropdown-item">
+                      <i data-lucide="download" style="width: 16px; height: 16px;"></i>
+                      Download
+                    </a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
 </div>
-<div class="content" style="padding: 32px 24px;">
-  <!-- Cards de Estatísticas Modernos -->
-  <div class="stats-grid">
-    <div class="stat-card primary">
-      <div class="stat-icon-value">
-        <div class="stat-icon primary">
-          <i data-lucide="users" style="width: 24px; height: 24px;"></i>
-        </div>
-        <div class="stat-value">1.247</div>
-      </div>
-      <div class="stat-label">Total de Clientes</div>
-      <div class="stat-badge positive">
-        <i data-lucide="trending-up" style="width: 12px; height: 12px;"></i>
-        +12% este mês
-      </div>
-    </div>
-    <div class="stat-card success">
-      <div class="stat-icon-value">
-        <div class="stat-icon success">
-          <i data-lucide="banknote" style="width: 24px; height: 24px;"></i>
-        </div>
-        <div class="stat-value">50%</div>
-      </div>
-      <div class="stat-label">Metas Alcançadas</div>
-      <div class="stat-badge positive">
-        <i data-lucide="trending-up" style="width: 12px; height: 12px;"></i>
-        +8.5% este mês
-      </div>
-    </div>
-    <div class="stat-card warning">
-      <div class="stat-icon-value">
-        <div class="stat-icon warning">
-          <i data-lucide="clock" style="width: 24px; height: 24px;"></i>
-        </div>
-        <div class="stat-value">89</div>
-      </div>
-      <div class="stat-label">Contratos Pendentes</div>
-      <div class="stat-badge attention">
-        <i data-lucide="alert-circle" style="width: 12px; height: 12px;"></i>
-        Requer atenção
-      </div>
-    </div>
-    <div class="stat-card accent">
-      <div class="stat-icon-value">
-        <div class="stat-icon accent">
-          <i data-lucide="credit-card" style="width: 24px; height: 24px;"></i>
-        </div>
-        <div class="stat-value">R$ 1.300</div>
-      </div>
-      <div class="stat-label">Comissões do Mês</div>
-      <div class="stat-badge positive">
-        <i data-lucide="trending-up" style="width: 12px; height: 12px;"></i>
-        +15.2% este mês
-      </div>
-    </div>
-  </div>
-  <!-- Tabela de Contratos Modernizada -->
-  <div class="modern-card">
-    <div class="modern-card-header d-flex align-items-center justify-content-between">
-      <h5 class="modern-card-title">
-        <i data-lucide="file-text" style="width: 20px; height: 20px;"></i>
-        Contratos Recentes
-      </h5>
-      <a href="#" class="modern-btn modern-btn-accent">
-        <i data-lucide="plus" style="width: 16px; height: 16px;"></i>
-        Novo Contrato
-      </a>
-    </div>
-    <div class="table-responsive">
-      <table class="modern-table">
-        <thead>
-          <tr>
-            <th>Cliente</th>
-            <th>Valor</th>
-            <th>Parcelas</th>
-            <th>Status</th>
-            <th>Data</th>
-            <th style="text-align: center;">Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <div class="d-flex align-items-center">
-                <div class="user-avatar" style="background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);">
-                  CO
-                </div>
-                <div>
-                  <div style="font-weight: 600; color: var(--neutral-900); margin-bottom: 2px;">Carlos Oliveira</div>
-                  <div style="color: var(--neutral-500); font-size: 13px;">carlos@email.com</div>
-                </div>
-              </div>
-            </td>
-            <td style="font-weight: 600; color: var(--neutral-900);">R$ 15.000,00</td>
-            <td style="color: var(--neutral-600);">84x</td>
-            <td><span class="status-badge approved">Aprovado</span></td>
-            <td style="color: var(--neutral-600);">25/01/2024</td>
-            <td style="text-align: center;">
-              <div class="dropdown">
-                <button type="button" class="action-btn dropdown-toggle" data-bs-toggle="dropdown">
-                  <i data-lucide="more-horizontal" style="width: 16px; height: 16px;"></i>
-                </button>
-                <div class="dropdown-menu">
-                  <a href="#" class="dropdown-item">
-                    <i data-lucide="eye" style="width: 16px; height: 16px;"></i>
-                    Visualizar
-                  </a>
-                  <a href="#" class="dropdown-item">
-                    <i data-lucide="edit" style="width: 16px; height: 16px;"></i>
-                    Editar
-                  </a>
-                  <a href="#" class="dropdown-item">
-                    <i data-lucide="download" style="width: 16px; height: 16px;"></i>
-                    Download
-                  </a>
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="d-flex align-items-center">
-                <div class="user-avatar" style="background: linear-gradient(135deg, var(--success) 0%, #34D399 100%);">
-                  FL
-                </div>
-                <div>
-                  <div style="font-weight: 600; color: var(--neutral-900); margin-bottom: 2px;">Fernanda Lima</div>
-                  <div style="color: var(--neutral-500); font-size: 13px;">fernanda@email.com</div>
-                </div>
-              </div>
-            </td>
-            <td style="font-weight: 600; color: var(--neutral-900);">R$ 8.500,00</td>
-            <td style="color: var(--neutral-600);">60x</td>
-            <td><span class="status-badge pending">Pendente</span></td>
-            <td style="color: var(--neutral-600);">24/01/2024</td>
-            <td style="text-align: center;">
-              <div class="dropdown">
-                <button type="button" class="action-btn dropdown-toggle" data-bs-toggle="dropdown">
-                  <i data-lucide="more-horizontal" style="width: 16px; height: 16px;"></i>
-                </button>
-                <div class="dropdown-menu">
-                  <a href="#" class="dropdown-item">
-                    <i data-lucide="eye" style="width: 16px; height: 16px;"></i>
-                    Visualizar
-                  </a>
-                  <a href="#" class="dropdown-item">
-                    <i data-lucide="edit" style="width: 16px; height: 16px;"></i>
-                    Editar
-                  </a>
-                  <a href="#" class="dropdown-item">
-                    <i data-lucide="download" style="width: 16px; height: 16px;"></i>
-                    Download
-                  </a>
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="d-flex align-items-center">
-                <div class="user-avatar" style="background: linear-gradient(135deg, var(--accent-orange) 0%, #FF8A65 100%);">
-                  RS
-                </div>
-                <div>
-                  <div style="font-weight: 600; color: var(--neutral-900); margin-bottom: 2px;">Roberto Silva</div>
-                  <div style="color: var(--neutral-500); font-size: 13px;">roberto@email.com</div>
-                </div>
-              </div>
-            </td>
-            <td style="font-weight: 600; color: var(--neutral-900);">R$ 22.000,00</td>
-            <td style="color: var(--neutral-600);">96x</td>
-            <td><span class="status-badge analysis">Em Análise</span></td>
-            <td style="color: var(--neutral-600);">23/01/2024</td>
-            <td style="text-align: center;">
-              <div class="dropdown">
-                <button type="button" class="action-btn dropdown-toggle" data-bs-toggle="dropdown">
-                  <i data-lucide="more-horizontal" style="width: 16px; height: 16px;"></i>
-                </button>
-                <div class="dropdown-menu">
-                  <a href="#" class="dropdown-item">
-                    <i data-lucide="eye" style="width: 16px; height: 16px;"></i>
-                    Visualizar
-                  </a>
-                  <a href="#" class="dropdown-item">
-                    <i data-lucide="edit" style="width: 16px; height: 16px;"></i>
-                    Editar
-                  </a>
-                  <a href="#" class="dropdown-item">
-                    <i data-lucide="download" style="width: 16px; height: 16px;"></i>
-                    Download
-                  </a>
-                </div>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
+<style>
+  .page-header-wrapper {
+    background: white;
+    padding: 16px 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: -24px; /* espaço negativo para sobrepor o conteúdo abaixo */
+    position: relative; /* para garantir que sombras e padding funcionem */
+    z-index: 1; /* para ficar acima do conteúdo abaixo */
+  }
+</style>
