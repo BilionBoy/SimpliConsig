@@ -1,16 +1,20 @@
+<!-- NAVBAR -->
 <div class="navbar navbar-dark navbar-expand-xl navbar-static custom-navbar">
   <div class="container-fluid">
+    <!-- Botão toggler para mobile -->
     <div class="d-flex d-xl-none me-2">
       <button type="button" class="navbar-toggler sidebar-mobile-main-toggle rounded-pill">
         <i class="ph-list"></i>
       </button>
     </div>
+    <!-- Logo / marca -->
     <div class="navbar-brand flex-0 flex-sm-1 py-0">
       <%= link_to home_index_path, class: 'd-flex align-items-center text-decoration-none text-white gap-2' do %>
         <img src="/layout/assets/img/teste22.png" style="height: 40px">
         <span class="logo-simpli-modern">SIMPLI</span>
       <% end %>
     </div>
+    <!-- Menu do usuário -->
     <ul class="nav flex-row justify-content-end order-1 order-lg-2">
       <li class="nav-item nav-item-dropdown-lg ms-lg-2">
         <a href="#" class="navbar-nav-link align-items-center rounded-pill user-avatar-btn" id="userMenuToggle">
@@ -24,11 +28,43 @@
     </ul>
   </div>
 </div>
+<!-- LINHA DIVISORA COM SOMBRA -->
+<div class="navbar-divider-shadow"></div>
+<!-- ESTILO -->
 <style>
+  .custom-navbar {
+    background-color: #093370;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  .navbar-divider-shadow {
+    background-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+  }
+
+  .logo-simpli-modern {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 1.9rem;
+    text-transform: uppercase;
+    color: #ffffff;
+    letter-spacing: 0.08em;
+  }
+
+  .user-avatar-btn {
+    background-color: rgba(255, 255, 255, 0.08);
+    padding: 6px 12px;
+    transition: background 0.3s ease;
+  }
+
+  .user-avatar-btn:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+
   .custom-dropdown-menu {
     display: none;
     position: absolute;
-    background-color: white;
+    background-color: #ffffff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
     right: 0;
@@ -36,38 +72,6 @@
     z-index: 1000;
     padding: 4px;
     width: 200px;
-  }
-  .logo-simpli {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 600;
-  font-size: 2.4rem;
-  letter-spacing: 0.1em; /* tracking aumentado */
-  text-transform: uppercase;
-  line-height: 1;
-  color: #ffffffff; /* azul escuro forte */
-  font-style: normal;
-  /* possível usar font-variant para pequenos caps */
-  }
-  .custom-navbar {
-  background-color: #04293A;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-  }
-
-  .logo-simpli-modern {
-  font-family: 'Manrope', sans-serif;
-  font-weight: 700;
-  font-size: 1.9rem;
-  text-transform: uppercase;
-  color: #ffffff;
-  letter-spacing: 0.08em;
-  }
-  .user-avatar-btn {
-  background-color: rgba(255,255,255,0.08);
-  padding: 6px 12px;
-  transition: background 0.3s ease;
-  }
-  .user-avatar-btn:hover {
-  background-color: rgba(255,255,255,0.15);
   }
 
   .btn-logout {
@@ -83,7 +87,6 @@
   }
 
   .btn-logout:hover {
-    color: #4a4a4a;
     background-color: #f2f2f2;
   }
 
@@ -91,20 +94,3 @@
     position: relative;
   }
 </style>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const userMenuToggle = document.getElementById('userMenuToggle');
-    const userMenu = document.getElementById('userMenu');
-
-    userMenuToggle.addEventListener('click', function (e) {
-      e.preventDefault();
-      userMenu.style.display = userMenu.style.display === 'block' ? 'none' : 'block';
-    });
-
-    document.addEventListener('click', function (e) {
-      if (!userMenu.contains(e.target) && !userMenuToggle.contains(e.target)) {
-        userMenu.style.display = 'none';
-      }
-    });
-  });
-</script>
