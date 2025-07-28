@@ -11,35 +11,24 @@
     <!-- Navegação -->
     <div class="sidebar-section">
       <ul class="nav nav-sidebar" data-nav-type="accordion" id="sidebar-items">
-        <li class="nav-item">
-          <a href="<%= root_path %>" class="nav-link custom-link">
-            <i class="bi-house-fill me-2 fs-5"></i>
-            <span>Home</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link custom-link">
-            <i class="bi-person-badge-fill me-2 fs-5"></i>
-            <span>Clientes</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link custom-link">
-            <i class="bi-file-earmark-text-fill me-2 fs-5"></i>
-            <span>Contratos</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link custom-link">
-            <i class="bi-bank me-2 fs-5"></i>
-            <span>Bancos</span>
-          </a>
-        </li>
+        <% sidebar_items = [
+          { path: root_path,                        icon: 'bi-house-fill me-2 fs-5',              label: 'Home' },
+          { path: admin_clientes_path,              icon: 'bi-person-badge-fill me-2 fs-5',       label: 'Clientes' },
+          { path: '#',                              icon: 'bi-file-earmark-text-fill me-2 fs-5',  label: 'Contratos' },
+          { path: '#',                              icon: 'bi-bank me-2 fs-5',                    label: 'Bancos' }
+        ] %>
+        <% sidebar_items.each do |item| %>
+          <li class="nav-item">
+            <%= link_to item[:path], class: "nav-link custom-link" do %>
+              <i class="<%= item[:icon] %>"></i>
+              <span><%= item[:label] %></span>
+            <% end %>
+          </li>
+        <% end %>
       </ul>
     </div>
   </div>
 </div>
-<!-- Script de filtro (caso adicione search futuramente) -->
 <script>
   function filterSidebar() {
     const input = document.getElementById('sidebar-search-input');
@@ -62,64 +51,5 @@
   }
 </script>
 <style>
-  .custom-sidebar {
-    background-color: #093370;
-    border-right: 1px solid rgba(255, 255, 255, 0.05);
-  }
 
-  .border-opacity {
-    border-color: rgba(255, 255, 255, 0.05) !important;
-  }
-
-  .nav-sidebar .nav-item {
-    padding: 0;
-  }
-
-  .nav-sidebar .nav-item:not(:last-child) {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  }
-
-  .nav-sidebar .custom-link {
-    display: flex;
-    align-items: center;
-    padding: 16px 24px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #fff;
-    font-family: 'Manrope', sans-serif;
-    transition: all 0.2s ease;
-    transform-origin: left center;
-    transform: scale(1);
-    text-decoration: none;
-    border-radius: 4px;
-  }
-
-  .nav-sidebar .custom-link i {
-    font-size: 1.5rem;
-    margin-right: 0.75rem;
-    color: #fff;
-    transition: color 0.2s ease;
-  }
-
-  .nav-sidebar .custom-link:hover {
-    transform: scale(0.98);
-    box-shadow: inset 2px 0 0 #1ca6ff;
-    background-color: rgba(28, 166, 255, 0.12);
-    color: #ffffff;
-  }
-
-  .nav-sidebar .custom-link:hover i {
-    color: #ffffff;
-  }
-
-  .nav-sidebar .custom-link:focus-visible {
-    outline: 2px solid #1ca6ff;
-    outline-offset: 2px;
-    background-color: rgba(28, 166, 255, 0.2);
-    color: #ffffff;
-  }
-
-  .nav-sidebar .custom-link:focus-visible i {
-    color: #ffffff;
-  }
 </style>
