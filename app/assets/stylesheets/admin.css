@@ -33,8 +33,7 @@
 }
 /* SIDEBAR E NAVBAR */
 
-
-/* */
+/* INDEX */
 .modern-dashboard {
   background: linear-gradient(135deg, var(--neutral-50) 0%, #ffffff 100%);
   min-height: 100vh;
@@ -91,6 +90,17 @@
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 24px;
   margin-bottom: 32px;
+}
+.stat-icon-value {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stat-value {
+  font-weight: 700;
+  font-size: 1.7rem;
+  color: var(--neutral-900, #222);
 }
 
 .stat-card {

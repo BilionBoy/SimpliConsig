@@ -12,6 +12,7 @@
     <%= stylesheet_link_tag "/layout/assets/css/animate.min.css",           "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "admin",                                  "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" %>
+    <link rel="stylesheet" href="https://unpkg.com/phosphor-icons@1.4.2/src/css/icons.css">
     <% # Fonts %>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
     <% # App JS do projeto %>
@@ -47,7 +48,9 @@
         <div class="content-inner">
           <%= yield :context_nav %>
           <div class="content">
-            <%= yield %>
+            <div class="modern-dashboard">
+              <%= yield %>
+            </div>
           </div>
         </div>
       </div>
