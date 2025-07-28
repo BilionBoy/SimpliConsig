@@ -1,4 +1,4 @@
-<div class="navbar navbar-dark navbar-expand-xl navbar-static" style="background: #052b43; padding-top: 0; padding-bottom: 0;">
+<div class="navbar navbar-dark navbar-expand-xl navbar-static custom-navbar">
   <div class="container-fluid">
     <div class="d-flex d-xl-none me-2">
       <button type="button" class="navbar-toggler sidebar-mobile-main-toggle rounded-pill">
@@ -7,22 +7,18 @@
     </div>
     <div class="navbar-brand flex-0 flex-sm-1 py-0">
       <%= link_to home_index_path, class: 'd-flex align-items-center text-decoration-none text-white gap-2' do %>
-        <img src="/layout/assets/img/teste22.png" style="height: 45px">
-        <span class="logo-simpli">SIMPLI</span>
+        <img src="/layout/assets/img/teste22.png" style="height: 40px">
+        <span class="logo-simpli-modern">SIMPLI</span>
       <% end %>
     </div>
     <ul class="nav flex-row justify-content-end order-1 order-lg-2">
       <li class="nav-item nav-item-dropdown-lg ms-lg-2">
-        <a href="#" class="navbar-nav-link align-items-center rounded-pill p-1" id="userMenuToggle">
-          <div class="status-indicator-container">
-            <i class="ph-user-circle"></i>
-          </div>
-          <span class="d-none d-xl-inline-block mx-lg-2">
-            <h4>Olá, Dhiogo </h4>
-          </span>
+        <a href="#" class="navbar-nav-link align-items-center rounded-pill user-avatar-btn" id="userMenuToggle">
+          <i class="ph-user-circle fs-4 text-white"></i>
+          <span class="d-none d-xl-inline-block mx-lg-2 text-white fw-medium">Olá, Dhiogo</span>
         </a>
         <div id="userMenu" class="custom-dropdown-menu">
-          <%= button_to '<i class="ph-sign-out me-2"></i>Sair'.html_safe,  class: "btn btn-logout"   %>
+          <%= button_to '<i class="ph-sign-out me-2"></i>Sair'.html_safe, class: "btn btn-logout" %>
         </div>
       </li>
     </ul>
@@ -51,6 +47,27 @@
   color: #ffffffff; /* azul escuro forte */
   font-style: normal;
   /* possível usar font-variant para pequenos caps */
+  }
+  .custom-navbar {
+  background-color: #04293A;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  }
+
+  .logo-simpli-modern {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: 1.9rem;
+  text-transform: uppercase;
+  color: #ffffff;
+  letter-spacing: 0.08em;
+  }
+  .user-avatar-btn {
+  background-color: rgba(255,255,255,0.08);
+  padding: 6px 12px;
+  transition: background 0.3s ease;
+  }
+  .user-avatar-btn:hover {
+  background-color: rgba(255,255,255,0.15);
   }
 
   .btn-logout {

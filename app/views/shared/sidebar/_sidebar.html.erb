@@ -1,43 +1,36 @@
-<div class="sidebar sidebar-dark sidebar-main sidebar-expand-xl" id="sidebar" style="background-color: #052b43;">
+<div class="sidebar sidebar-dark sidebar-main sidebar-expand-xl custom-sidebar" id="sidebar">
   <div class="sidebar-content">
-    <div class="sidebar-section border-bottom border-white border-opacity-10 pb-2 mb-2">
-      <div class="sidebar-section-body d-flex justify-content-between align-items-center">
-        <h5 class="sidebar-resize-hide my-auto text-white"><b>Menu</b></h5>
-        <div>
-          <button
-            type="button"
-            class="btn btn-flat-white btn-icon btn-sm rounded-pill border-transparent sidebar-mobile-main-toggle d-xl-none"
-          >
-            <i class="ph-x fs-5"></i>
-          </button>
-        </div>
+    <div class="sidebar-section pb-2 mb-2 border-bottom border-opacity">
+      <div class="sidebar-section-body d-flex justify-content-between align-items-center px-3">
+        <button type="button" class="btn btn-sm text-white sidebar-mobile-main-toggle d-xl-none">
+          <i class="ph-x fs-5"></i>
+        </button>
       </div>
     </div>
-    <!-- Itens da sidebar -->
     <div class="sidebar-section">
       <ul class="nav nav-sidebar" data-nav-type="accordion" id="sidebar-items">
-        <li class="nav-item border-bottom border-white border-opacity-10">
-          <a href="<%= root_path %>" class="nav-link py-3 px-3 fs-6 d-flex align-items-center" id="config-link" data-no-close>
-            <i class="bi-house-fill me-3 fs-5"></i>
-            <span class="fw-semibold">Home</span>
+        <li class="nav-item">
+          <a href="<%= root_path %>" class="nav-link custom-link">
+            <i class="bi-house-fill me-2 fs-5"></i>
+            <span>Home</span>
           </a>
         </li>
-        <li class="nav-item border-bottom border-white border-opacity-10">
-          <a href="#" class="nav-link py-3 px-3 fs-6 d-flex align-items-center">
-            <i class="bi-person-badge-fill me-3 fs-5"></i>
-            <span class="fw-semibold">Clientes</span>
+        <li class="nav-item">
+          <a href="#" class="nav-link custom-link">
+            <i class="bi-person-badge-fill me-2 fs-5"></i>
+            <span>Clientes</span>
           </a>
         </li>
-        <li class="nav-item border-bottom border-white border-opacity-10">
-          <a href="#" class="nav-link py-3 px-3 fs-6 d-flex align-items-center">
-            <i class="bi-file-earmark-text-fill me-3 fs-5"></i>
-            <span class="fw-semibold">Contratos</span>
+        <li class="nav-item">
+          <a href="#" class="nav-link custom-link">
+            <i class="bi-file-earmark-text-fill me-2 fs-5"></i>
+            <span>Contratos</span>
           </a>
         </li>
-        <li class="nav-item border-bottom border-white border-opacity-10">
-          <a href="#" class="nav-link py-3 px-3 fs-6 d-flex align-items-center">
-            <i class="bi-bank me-3 fs-5"></i>
-            <span class="fw-semibold">Bancos</span>
+        <li class="nav-item">
+          <a href="#" class="nav-link custom-link">
+            <i class="bi-bank me-2 fs-5"></i>
+            <span>Bancos</span>
           </a>
         </li>
       </ul>

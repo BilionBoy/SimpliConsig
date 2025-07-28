@@ -1,253 +1,207 @@
-<div class="page-header page-header-light shadow-sm" style="background-color: #052b43;">
-  <div class="page-header-content d-lg-flex">
-    <div class="d-flex">
-      <div class="breadcrumb py-2">
-        <a href="<%= admin_index_path %>" class="breadcrumb-item">
-          <i data-lucide="home" style="width: 16px; height: 16px;"></i>
+<div class="modern-dashboard">
+  <!-- Header moderno -->
+  <div class="page-header modern-header shadow-sm">
+    <div class="page-header-content d-lg-flex">
+      <div class="d-flex">
+        <div class="breadcrumb modern-breadcrumb py-3">
+          <a href="<%= admin_index_path %>" class="breadcrumb-item">
+            <i data-lucide="home" style="width: 16px; height: 16px;"></i>
+          </a>
+          <span class="breadcrumb-item active">Dashboard</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content" style="padding: 32px 24px;">
+    <!-- Cards de Estatísticas Modernos -->
+    <div class="stats-grid">
+      <div class="stat-card primary">
+        <div class="stat-icon primary">
+          <i data-lucide="users" style="width: 24px; height: 24px;"></i>
+        </div>
+        <div class="stat-value">1.247</div>
+        <div class="stat-label">Total de Clientes</div>
+        <div class="stat-badge positive">
+          <i data-lucide="trending-up" style="width: 12px; height: 12px;"></i>
+          +12% este mês
+        </div>
+      </div>
+      <div class="stat-card success">
+        <div class="stat-icon success">
+          <i data-lucide="banknote" style="width: 24px; height: 24px;"></i>
+        </div>
+        <div class="stat-value">R$ 2.847.230</div>
+        <div class="stat-label">Volume Consignado</div>
+        <div class="stat-badge positive">
+          <i data-lucide="trending-up" style="width: 12px; height: 12px;"></i>
+          +8.5% este mês
+        </div>
+      </div>
+      <div class="stat-card warning">
+        <div class="stat-icon warning">
+          <i data-lucide="clock" style="width: 24px; height: 24px;"></i>
+        </div>
+        <div class="stat-value">89</div>
+        <div class="stat-label">Contratos Pendentes</div>
+        <div class="stat-badge attention">
+          <i data-lucide="alert-circle" style="width: 12px; height: 12px;"></i>
+          Requer atenção
+        </div>
+      </div>
+      <div class="stat-card accent">
+        <div class="stat-icon accent">
+          <i data-lucide="credit-card" style="width: 24px; height: 24px;"></i>
+        </div>
+        <div class="stat-value">R$ 47.892</div>
+        <div class="stat-label">Comissões do Mês</div>
+        <div class="stat-badge positive">
+          <i data-lucide="trending-up" style="width: 12px; height: 12px;"></i>
+          +15.2% este mês
+        </div>
+      </div>
+    </div>
+    <!-- Tabela de Contratos Modernizada -->
+    <div class="modern-card">
+      <div class="modern-card-header d-flex align-items-center justify-content-between">
+        <h5 class="modern-card-title">
+          <i data-lucide="file-text" style="width: 20px; height: 20px;"></i>
+          Contratos Recentes
+        </h5>
+        <a href="#" class="modern-btn modern-btn-accent">
+          <i data-lucide="plus" style="width: 16px; height: 16px;"></i>
+          Novo Contrato
         </a>
-        <span class="breadcrumb-item active">Dashboard</span>
+      </div>
+      <div class="table-responsive">
+        <table class="modern-table">
+          <thead>
+            <tr>
+              <th>Cliente</th>
+              <th>Valor</th>
+              <th>Parcelas</th>
+              <th>Status</th>
+              <th>Data</th>
+              <th style="text-align: center;">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="d-flex align-items-center">
+                  <div class="user-avatar" style="background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);">
+                    CO
+                  </div>
+                  <div>
+                    <div style="font-weight: 600; color: var(--neutral-900); margin-bottom: 2px;">Carlos Oliveira</div>
+                    <div style="color: var(--neutral-500); font-size: 13px;">carlos@email.com</div>
+                  </div>
+                </div>
+              </td>
+              <td style="font-weight: 600; color: var(--neutral-900);">R$ 15.000,00</td>
+              <td style="color: var(--neutral-600);">84x</td>
+              <td><span class="status-badge approved">Aprovado</span></td>
+              <td style="color: var(--neutral-600);">25/01/2024</td>
+              <td style="text-align: center;">
+                <div class="dropdown">
+                  <button type="button" class="action-btn dropdown-toggle" data-bs-toggle="dropdown">
+                    <i data-lucide="more-horizontal" style="width: 16px; height: 16px;"></i>
+                  </button>
+                  <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item">
+                      <i data-lucide="eye" style="width: 16px; height: 16px;"></i>
+                      Visualizar
+                    </a>
+                    <a href="#" class="dropdown-item">
+                      <i data-lucide="edit" style="width: 16px; height: 16px;"></i>
+                      Editar
+                    </a>
+                    <a href="#" class="dropdown-item">
+                      <i data-lucide="download" style="width: 16px; height: 16px;"></i>
+                      Download
+                    </a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="d-flex align-items-center">
+                  <div class="user-avatar" style="background: linear-gradient(135deg, var(--success) 0%, #34D399 100%);">
+                    FL
+                  </div>
+                  <div>
+                    <div style="font-weight: 600; color: var(--neutral-900); margin-bottom: 2px;">Fernanda Lima</div>
+                    <div style="color: var(--neutral-500); font-size: 13px;">fernanda@email.com</div>
+                  </div>
+                </div>
+              </td>
+              <td style="font-weight: 600; color: var(--neutral-900);">R$ 8.500,00</td>
+              <td style="color: var(--neutral-600);">60x</td>
+              <td><span class="status-badge pending">Pendente</span></td>
+              <td style="color: var(--neutral-600);">24/01/2024</td>
+              <td style="text-align: center;">
+                <div class="dropdown">
+                  <button type="button" class="action-btn dropdown-toggle" data-bs-toggle="dropdown">
+                    <i data-lucide="more-horizontal" style="width: 16px; height: 16px;"></i>
+                  </button>
+                  <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item">
+                      <i data-lucide="eye" style="width: 16px; height: 16px;"></i>
+                      Visualizar
+                    </a>
+                    <a href="#" class="dropdown-item">
+                      <i data-lucide="edit" style="width: 16px; height: 16px;"></i>
+                      Editar
+                    </a>
+                    <a href="#" class="dropdown-item">
+                      <i data-lucide="download" style="width: 16px; height: 16px;"></i>
+                      Download
+                    </a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="d-flex align-items-center">
+                  <div class="user-avatar" style="background: linear-gradient(135deg, var(--accent-orange) 0%, #FF8A65 100%);">
+                    RS
+                  </div>
+                  <div>
+                    <div style="font-weight: 600; color: var(--neutral-900); margin-bottom: 2px;">Roberto Silva</div>
+                    <div style="color: var(--neutral-500); font-size: 13px;">roberto@email.com</div>
+                  </div>
+                </div>
+              </td>
+              <td style="font-weight: 600; color: var(--neutral-900);">R$ 22.000,00</td>
+              <td style="color: var(--neutral-600);">96x</td>
+              <td><span class="status-badge analysis">Em Análise</span></td>
+              <td style="color: var(--neutral-600);">23/01/2024</td>
+              <td style="text-align: center;">
+                <div class="dropdown">
+                  <button type="button" class="action-btn dropdown-toggle" data-bs-toggle="dropdown">
+                    <i data-lucide="more-horizontal" style="width: 16px; height: 16px;"></i>
+                  </button>
+                  <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item">
+                      <i data-lucide="eye" style="width: 16px; height: 16px;"></i>
+                      Visualizar
+                    </a>
+                    <a href="#" class="dropdown-item">
+                      <i data-lucide="edit" style="width: 16px; height: 16px;"></i>
+                      Editar
+                    </a>
+                    <a href="#" class="dropdown-item">
+                      <i data-lucide="download" style="width: 16px; height: 16px;"></i>
+                      Download
+                    </a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
-  
 </div>
-<div class="content">
-  <!-- Cards de Estatísticas -->
-  <div class="row">
-    <div class="col-sm-6 col-xl-3">
-      <div class="card card-body bg-primary text-white">
-        <div class="d-flex align-items-center">
-          <div class="flex-fill">
-            <h3 class="mb-0">1.247</h3>
-            <span class="text-white-75">Total de Clientes</span>
-          </div>
-          <div class="ms-3">
-            <i data-lucide="users" style="width: 32px; height: 32px; opacity: 0.7;"></i>
-          </div>
-        </div>
-        <div class="mt-3">
-          <span class="badge bg-white bg-opacity-20">
-            <i data-lucide="trending-up" style="width: 12px; height: 12px;"></i>
-            +12% este mês
-          </span>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6 col-xl-3">
-      <div class="card card-body bg-success text-white">
-        <div class="d-flex align-items-center">
-          <div class="flex-fill">
-            <h3 class="mb-0">R$ 2.847.230</h3>
-            <span class="text-white-75">Volume Consignado</span>
-          </div>
-          <div class="ms-3">
-            <i data-lucide="banknote" style="width: 32px; height: 32px; opacity: 0.7;"></i>
-          </div>
-        </div>
-        <div class="mt-3">
-          <span class="badge bg-white bg-opacity-20">
-            <i data-lucide="trending-up" style="width: 12px; height: 12px;"></i>
-            +8.5% este mês
-          </span>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6 col-xl-3">
-      <div class="card card-body bg-warning text-white">
-        <div class="d-flex align-items-center">
-          <div class="flex-fill">
-            <h3 class="mb-0">89</h3>
-            <span class="text-white-75">Contratos Pendentes</span>
-          </div>
-          <div class="ms-3">
-            <i data-lucide="clock" style="width: 32px; height: 32px; opacity: 0.7;"></i>
-          </div>
-        </div>
-        <div class="mt-3">
-          <span class="badge bg-white bg-opacity-20">
-            <i data-lucide="alert-circle" style="width: 12px; height: 12px;"></i>
-            Requer atenção
-          </span>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6 col-xl-3">
-      <div class="card card-body bg-info text-white">
-        <div class="d-flex align-items-center">
-          <div class="flex-fill">
-            <h3 class="mb-0">R$ 47.892</h3>
-            <span class="text-white-75">Comissões do Mês</span>
-          </div>
-          <div class="ms-3">
-            <i data-lucide="credit-card" style="width: 32px; height: 32px; opacity: 0.7;"></i>
-          </div>
-        </div>
-        <div class="mt-3">
-          <span class="badge bg-white bg-opacity-20">
-            <i data-lucide="trending-up" style="width: 12px; height: 12px;"></i>
-            +15.2% este mês
-          </span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Gráficos e Tabelas -->
-  <div class="row">
-    <!-- Tabela de Contratos Recentes -->
-    <div class="row">
-      <div class="col-12">
-        <div class="card">
-          <div class="card-header d-flex align-items-center">
-            <h5 class="mb-0">
-              <i data-lucide="file-text" style="width: 20px; height: 20px;"></i>
-              Contratos Recentes
-            </h5>
-            <div class="ms-auto">
-              <a href="#" class="btn btn-primary btn-sm">
-                <i data-lucide="plus" style="width: 14px; height: 14px;"></i>
-                Novo Contrato
-              </a>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th>Cliente</th>
-                    <th>Valor</th>
-                    <th>Parcelas</th>
-                    <th>Status</th>
-                    <th>Data</th>
-                    <th class="text-center">Ações</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      <div class="d-flex align-items-center">
-                        <div class="bg-primary bg-opacity-10 text-primary rounded-circle p-2 me-3">
-                          <i data-lucide="user" style="width: 16px; height: 16px;"></i>
-                        </div>
-                        <div>
-                          <div class="fw-semibold">Carlos Oliveira</div>
-                          <div class="text-muted small">carlos@email.com</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="fw-semibold">R$ 15.000,00</td>
-                    <td>84x</td>
-                    <td>
-                      <span class="badge bg-success">Aprovado</span>
-                    </td>
-                    <td>25/01/2024</td>
-                    <td class="text-center">
-                      <div class="dropdown">
-                        <button type="button" class="btn btn-light btn-sm dropdown-toggle" data-bs-toggle="dropdown">
-                          <i data-lucide="more-horizontal" style="width: 14px; height: 14px;"></i>
-                        </button>
-                        <div class="dropdown-menu">
-                          <a href="#" class="dropdown-item">
-                            <i data-lucide="eye" style="width: 14px; height: 14px;"></i>
-                            Visualizar
-                          </a>
-                          <a href="#" class="dropdown-item">
-                            <i data-lucide="edit" style="width: 14px; height: 14px;"></i>
-                            Editar
-                          </a>
-                          <a href="#" class="dropdown-item">
-                            <i data-lucide="download" style="width: 14px; height: 14px;"></i>
-                            Download
-                          </a>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex align-items-center">
-                        <div class="bg-success bg-opacity-10 text-success rounded-circle p-2 me-3">
-                          <i data-lucide="user" style="width: 16px; height: 16px;"></i>
-                        </div>
-                        <div>
-                          <div class="fw-semibold">Fernanda Lima</div>
-                          <div class="text-muted small">fernanda@email.com</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="fw-semibold">R$ 8.500,00</td>
-                    <td>60x</td>
-                    <td>
-                      <span class="badge bg-warning">Pendente</span>
-                    </td>
-                    <td>24/01/2024</td>
-                    <td class="text-center">
-                      <div class="dropdown">
-                        <button type="button" class="btn btn-light btn-sm dropdown-toggle" data-bs-toggle="dropdown">
-                          <i data-lucide="more-horizontal" style="width: 14px; height: 14px;"></i>
-                        </button>
-                        <div class="dropdown-menu">
-                          <a href="#" class="dropdown-item">
-                            <i data-lucide="eye" style="width: 14px; height: 14px;"></i>
-                            Visualizar
-                          </a>
-                          <a href="#" class="dropdown-item">
-                            <i data-lucide="edit" style="width: 14px; height: 14px;"></i>
-                            Editar
-                          </a>
-                          <a href="#" class="dropdown-item">
-                            <i data-lucide="download" style="width: 14px; height: 14px;"></i>
-                            Download
-                          </a>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex align-items-center">
-                        <div class="bg-info bg-opacity-10 text-info rounded-circle p-2 me-3">
-                          <i data-lucide="user" style="width: 16px; height: 16px;"></i>
-                        </div>
-                        <div>
-                          <div class="fw-semibold">Roberto Silva</div>
-                          <div class="text-muted small">roberto@email.com</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="fw-semibold">R$ 22.000,00</td>
-                    <td>96x</td>
-                    <td>
-                      <span class="badge bg-primary">Em Análise</span>
-                    </td>
-                    <td>23/01/2024</td>
-                    <td class="text-center">
-                      <div class="dropdown">
-                        <button type="button" class="btn btn-light btn-sm dropdown-toggle" data-bs-toggle="dropdown">
-                          <i data-lucide="more-horizontal" style="width: 14px; height: 14px;"></i>
-                        </button>
-                        <div class="dropdown-menu">
-                          <a href="#" class="dropdown-item">
-                            <i data-lucide="eye" style="width: 14px; height: 14px;"></i>
-                            Visualizar
-                          </a>
-                          <a href="#" class="dropdown-item">
-                            <i data-lucide="edit" style="width: 14px; height: 14px;"></i>
-                            Editar
-                          </a>
-                          <a href="#" class="dropdown-item">
-                            <i data-lucide="download" style="width: 14px; height: 14px;"></i>
-                            Download
-                          </a>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
