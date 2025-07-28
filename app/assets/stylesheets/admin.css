@@ -734,6 +734,8 @@ abbr {
 }
 
 .form-input {
+  color: black;
+
   padding: 12px 16px;
   border: 1px solid var(--neutral-300);
   border-radius: 10px;
