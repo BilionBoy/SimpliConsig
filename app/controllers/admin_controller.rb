@@ -7,4 +7,7 @@ class AdminController < ApplicationController
 
   def clientes
   end
+
+  def contratos
+  end
 end

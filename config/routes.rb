@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'admin/index'
   get 'admin/new'
   get 'admin/clientes'
+  get 'admin/contratos'
   get 'home/index'
 
   # Rotas Scaffold

@@ -1,6 +1,6 @@
 <style>
-  /* Melhorias no espaçamento e gestalt */
-  .clients-stats {
+  /* Reutilizando estilos do index com adaptações para contratos */
+  .contracts-stats {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
@@ -47,7 +47,7 @@
   .filter-group {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr auto;
-    gap: 20px; /* Espaçamento adequado */
+    gap: 20px;
     align-items: end;
   }
 
@@ -186,11 +186,10 @@
     gap: 12px;
   }
 
-  /* CORREÇÃO PRINCIPAL: Espaçamento adequado entre botões */
   .card-actions {
     display: flex;
     align-items: center;
-    gap: 16px; /* Espaçamento adequado entre Exportar e Novo Cliente */
+    gap: 16px;
   }
 
   .btn-export {
@@ -215,7 +214,7 @@
     color: white;
   }
 
-  .btn-new-client {
+  .btn-new-contract {
     background: var(--primary-blue);
     color: white;
     padding: 12px 20px;
@@ -232,7 +231,7 @@
     box-shadow: 0 2px 8px rgba(30, 64, 175, 0.2);
   }
 
-  .btn-new-client:hover {
+  .btn-new-contract:hover {
     background: var(--primary-blue-dark);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
@@ -266,20 +265,7 @@
     background: var(--neutral-25);
   }
 
-  .client-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: 700;
-    font-size: 14px;
-    margin-right: 12px;
-  }
-
-  .client-status {
+  .contract-status {
     padding: 4px 12px;
     border-radius: 20px;
     font-size: 12px;
@@ -288,12 +274,22 @@
     letter-spacing: 0.5px;
   }
 
-  .client-status.active {
+  .contract-status.ativo {
     background: rgba(16, 185, 129, 0.1);
     color: var(--success);
   }
 
-  .client-status.inactive {
+  .contract-status.pendente {
+    background: rgba(245, 158, 11, 0.1);
+    color: #d97706;
+  }
+
+  .contract-status.cancelado {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--error);
+  }
+
+  .contract-status.finalizado {
     background: rgba(107, 114, 128, 0.1);
     color: var(--neutral-500);
   }
@@ -311,6 +307,33 @@
   .action-btn:hover {
     background: var(--neutral-100);
     color: var(--neutral-700);
+  }
+
+  .dropdown-menu {
+    min-width: 140px;
+    max-height: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--neutral-200);
+    padding: 8px 0;
+  }
+
+  .dropdown-item {
+    padding: 8px 16px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+  }
+
+  .dropdown-item:hover {
+    background: var(--neutral-50);
+  }
+
+  .dropdown-item.text-danger:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--error);
   }
 
   .pagination-modern {
@@ -362,11 +385,11 @@
       gap: 12px;
     }
 
-    .btn-export, .btn-new-client {
+    .btn-export, .btn-new-contract {
       justify-content: center;
     }
 
-    .clients-stats {
+    .contracts-stats {
       grid-template-columns: repeat(2, 1fr);
     }
   }
@@ -380,28 +403,28 @@
           <a href="<%= admin_index_path %>" class="breadcrumb-item">
             <i data-lucide="home" style="width: 16px; height: 16px;"></i>
           </a>
-          <span class="breadcrumb-item active">Clientes</span>
+          <span class="breadcrumb-item active">Contratos</span>
         </div>
       </div>
     </div>
   </div>
   <div class="content" style="padding: 32px 24px;">
-    <!-- Estatísticas Rápidas -->
-    <div class="clients-stats">
+    <!-- Estatísticas de Contratos -->
+    <div class="contracts-stats">
       <div class="stat-mini">
-        <div class="stat-mini-value">1.247</div>
+        <div class="stat-mini-value">892</div>
         <div class="stat-mini-label">Total</div>
       </div>
       <div class="stat-mini">
-        <div class="stat-mini-value">1.089</div>
+        <div class="stat-mini-value">654</div>
         <div class="stat-mini-label">Ativos</div>
       </div>
       <div class="stat-mini">
-        <div class="stat-mini-value">158</div>
-        <div class="stat-mini-label">Inativos</div>
+        <div class="stat-mini-value">127</div>
+        <div class="stat-mini-label">Pendentes</div>
       </div>
       <div class="stat-mini">
-        <div class="stat-mini-value">23</div>
+        <div class="stat-mini-value">18</div>
         <div class="stat-mini-label">Novos (30d)</div>
       </div>
     </div>
@@ -409,25 +432,26 @@
     <div class="search-filters">
       <div class="filter-group">
         <div class="form-group">
-          <label class="form-label">Buscar Cliente</label>
-          <input type="text" class="form-input" placeholder="Nome, CPF ou email...">
+          <label class="form-label">Buscar Contrato</label>
+          <input type="text" class="form-input" placeholder="Número, cliente ou CPF...">
         </div>
         <div class="form-group">
           <label class="form-label">Status</label>
           <select class="form-select">
             <option value="">Todos os status</option>
-            <option value="active">Ativo</option>
-            <option value="inactive">Inativo</option>
-            <option value="blocked">Bloqueado</option>
+            <option value="ativo">Ativo</option>
+            <option value="pendente">Pendente</option>
+            <option value="cancelado">Cancelado</option>
+            <option value="finalizado">Finalizado</option>
           </select>
         </div>
         <div class="form-group">
-          <label class="form-label">Cidade</label>
+          <label class="form-label">Tipo</label>
           <select class="form-select">
-            <option value="">Todas as cidades</option>
-            <option value="sp">São Paulo</option>
-            <option value="rj">Rio de Janeiro</option>
-            <option value="mg">Belo Horizonte</option>
+            <option value="">Todos os tipos</option>
+            <option value="consignado">Consignado</option>
+            <option value="cartao">Cartão Benefício</option>
+            <option value="novo">Contrato Novo</option>
           </select>
         </div>
         <div class="form-group">
@@ -441,35 +465,34 @@
     <!-- Ações em Lote -->
     <div class="bulk-actions" id="bulkActions">
       <div class="bulk-text">
-        <span id="selectedCount">0</span> clientes selecionados
+        <span id="selectedCount">0</span> contratos selecionados
       </div>
       <div class="bulk-buttons">
         <button class="bulk-btn bulk-btn-primary">
-          <i data-lucide="mail" style="width: 14px; height: 14px;"></i>
-          Enviar Email
+          <i data-lucide="file-text" style="width: 14px; height: 14px;"></i>
+          Gerar Relatório
         </button>
         <button class="bulk-btn bulk-btn-danger">
-          <i data-lucide="trash-2" style="width: 14px; height: 14px;"></i>
-          Excluir
+          <i data-lucide="x-circle" style="width: 14px; height: 14px;"></i>
+          Cancelar
         </button>
       </div>
     </div>
-    <!-- Tabela de Clientes -->
+    <!-- Tabela de Contratos -->
     <div class="modern-card">
       <div class="modern-card-header d-flex align-items-center justify-content-between">
         <h5 class="modern-card-title">
-          <i data-lucide="users" style="width: 20px; height: 20px;"></i>
-          Lista de Clientes
+          <i data-lucide="file-text" style="width: 20px; height: 20px;"></i>
+          Lista de Contratos
         </h5>
-        <!-- CORREÇÃO: Espaçamento adequado entre botões -->
         <div class="card-actions">
           <button class="btn-export">
             <i data-lucide="download" style="width: 16px; height: 16px;"></i>
             Exportar
           </button>
-          <a href="<%= admin_new_path %>" class="btn-new-client">
+          <a href="<%= root_path %>" class="btn-new-contract">
             <i data-lucide="plus" style="width: 16px; height: 16px;"></i>
-            Novo Cliente
+            Novo Contrato
           </a>
         </div>
       </div>
@@ -480,42 +503,72 @@
               <th style="width: 50px;">
                 <input type="checkbox" id="selectAll" style="width: 16px; height: 16px;">
               </th>
+              <th style="text-align: center; width: 80px;">Ações</th>
+              <th>Contrato</th>
               <th>Cliente</th>
-              <th>CPF</th>
-              <th>Telefone</th>
-              <th>Cidade</th>
+              <th>Valor</th>
+              <th>Parcelas</th>
               <th>Status</th>
-              <th>Cadastro</th>
-              <th style="text-align: center;">Ações</th>
+              <th>Criado em</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>
-                <input type="checkbox" class="client-checkbox" style="width: 16px; height: 16px;">
+                <input type="checkbox" class="contract-checkbox" style="width: 16px; height: 16px;">
               </td>
-              <td>
-                <div class="d-flex align-items-center">
-                  <div class="client-avatar" style="background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);">
-                    CO
-                  </div>
-                  <div>
-                    <div style="font-weight: 600; color: var(--neutral-900); margin-bottom: 2px;">Carlos Oliveira</div>
-                    <div style="color: var(--neutral-500); font-size: 13px;">carlos@email.com</div>
+              <td style="text-align: center;">
+                <div class="dropdown">
+                  <button type="button" class="action-btn dropdown-toggle" data-bs-toggle="dropdown">
+                    <i data-lucide="more-horizontal" style="width: 16px; height: 16px;"></i>
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-start">
+                    <a href="#" class="dropdown-item">
+                      <i data-lucide="eye" style="width: 16px; height: 16px;"></i>
+                      Visualizar
+                    </a>
+                    <a href="#" class="dropdown-item">
+                      <i data-lucide="edit" style="width: 16px; height: 16px;"></i>
+                      Editar
+                    </a>
+                    <a href="#" class="dropdown-item">
+                      <i data-lucide="printer" style="width: 16px; height: 16px;"></i>
+                      Imprimir
+                    </a>
+                    <a href="#" class="dropdown-item text-danger">
+                      <i data-lucide="x-circle" style="width: 16px; height: 16px;"></i>
+                      Cancelar
+                    </a>
                   </div>
                 </div>
               </td>
-              <td style="color: var(--neutral-600); font-family: monospace;">123.456.789-00</td>
-              <td style="color: var(--neutral-600);">(11) 99999-9999</td>
-              <td style="color: var(--neutral-600);">São Paulo, SP</td>
-              <td><span class="client-status active">Ativo</span></td>
+              <td>
+                <div>
+                  <div style="font-weight: 600; color: var(--neutral-900); margin-bottom: 2px;">#CON-2024-001</div>
+                  <div style="color: var(--neutral-500); font-size: 13px;">Consignado</div>
+                </div>
+              </td>
+              <td>
+                <div>
+                  <div style="font-weight: 600; color: var(--neutral-900); margin-bottom: 2px;">Carlos Oliveira</div>
+                  <div style="color: var(--neutral-500); font-size: 13px;">123.456.789-00</div>
+                </div>
+              </td>
+              <td style="font-weight: 600; color: var(--neutral-900);">R$ 15.000,00</td>
+              <td style="color: var(--neutral-600);">24x R$ 625,00</td>
+              <td><span class="contract-status ativo">Ativo</span></td>
               <td style="color: var(--neutral-600);">15/01/2024</td>
+            </tr>
+            <tr>
+              <td>
+                <input type="checkbox" class="contract-checkbox" style="width: 16px; height: 16px;">
+              </td>
               <td style="text-align: center;">
                 <div class="dropdown">
                   <button type="button" class="action-btn dropdown-toggle" data-bs-toggle="dropdown">
                     <i data-lucide="more-horizontal" style="width: 16px; height: 16px;"></i>
                   </button>
-                  <div class="dropdown-menu">
+                  <div class="dropdown-menu dropdown-menu-start">
                     <a href="#" class="dropdown-item">
                       <i data-lucide="eye" style="width: 16px; height: 16px;"></i>
                       Visualizar
@@ -525,91 +578,43 @@
                       Editar
                     </a>
                     <a href="#" class="dropdown-item">
-                      <i data-lucide="file-text" style="width: 16px; height: 16px;"></i>
-                      Contratos
+                      <i data-lucide="printer" style="width: 16px; height: 16px;"></i>
+                      Imprimir
                     </a>
-                    <div class="dropdown-divider"></div>
                     <a href="#" class="dropdown-item text-danger">
-                      <i data-lucide="trash-2" style="width: 16px; height: 16px;"></i>
-                      Excluir
+                      <i data-lucide="x-circle" style="width: 16px; height: 16px;"></i>
+                      Cancelar
                     </a>
                   </div>
                 </div>
               </td>
-            </tr>
-            <tr>
               <td>
-                <input type="checkbox" class="client-checkbox" style="width: 16px; height: 16px;">
-              </td>
-              <td>
-                <div class="d-flex align-items-center">
-                  <div class="client-avatar" style="background: linear-gradient(135deg, var(--success) 0%, #34D399 100%);">
-                    FL
-                  </div>
-                  <div>
-                    <div style="font-weight: 600; color: var(--neutral-900); margin-bottom: 2px;">Fernanda Lima</div>
-                    <div style="color: var(--neutral-500); font-size: 13px;">fernanda@email.com</div>
-                  </div>
+                <div>
+                  <div style="font-weight: 600; color: var(--neutral-900); margin-bottom: 2px;">#CON-2024-002</div>
+                  <div style="color: var(--neutral-500); font-size: 13px;">Cartão Benefício</div>
                 </div>
               </td>
-              <td style="color: var(--neutral-600); font-family: monospace;">987.654.321-00</td>
-              <td style="color: var(--neutral-600);">(11) 88888-8888</td>
-              <td style="color: var(--neutral-600);">Rio de Janeiro, RJ</td>
-              <td><span class="client-status active">Ativo</span></td>
+              <td>
+                <div>
+                  <div style="font-weight: 600; color: var(--neutral-900); margin-bottom: 2px;">Fernanda Lima</div>
+                  <div style="color: var(--neutral-500); font-size: 13px;">987.654.321-00</div>
+                </div>
+              </td>
+              <td style="font-weight: 600; color: var(--neutral-900);">R$ 8.500,00</td>
+              <td style="color: var(--neutral-600);">12x R$ 708,33</td>
+              <td><span class="contract-status pendente">Pendente</span></td>
               <td style="color: var(--neutral-600);">12/01/2024</td>
-              <td style="text-align: center;">
-                <div class="dropdown">
-                  <button type="button" class="action-btn dropdown-toggle" data-bs-toggle="dropdown">
-                    <i data-lucide="more-horizontal" style="width: 16px; height: 16px;"></i>
-                  </button>
-                  <div class="dropdown-menu">
-                    <a href="#" class="dropdown-item">
-                      <i data-lucide="eye" style="width: 16px; height: 16px;"></i>
-                      Visualizar
-                    </a>
-                    <a href="#" class="dropdown-item">
-                      <i data-lucide="edit" style="width: 16px; height: 16px;"></i>
-                      Editar
-                    </a>
-                    <a href="#" class="dropdown-item">
-                      <i data-lucide="file-text" style="width: 16px; height: 16px;"></i>
-                      Contratos
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item text-danger">
-                      <i data-lucide="trash-2" style="width: 16px; height: 16px;"></i>
-                      Excluir
-                    </a>
-                  </div>
-                </div>
-              </td>
             </tr>
             <tr>
               <td>
-                <input type="checkbox" class="client-checkbox" style="width: 16px; height: 16px;">
+                <input type="checkbox" class="contract-checkbox" style="width: 16px; height: 16px;">
               </td>
-              <td>
-                <div class="d-flex align-items-center">
-                  <div class="client-avatar" style="background: linear-gradient(135deg, var(--neutral-400) 0%, var(--neutral-500) 100%);">
-                    RS
-                  </div>
-                  <div>
-                    <div style="font-weight: 600; color: var(--neutral-900); margin-bottom: 2px;">Roberto Silva</div>
-                    <div style="color: var(--neutral-500); font-size: 13px;">roberto@email.com</div>
-                  </div>
-                </div>
-              </td>
-              <td style="color: var(--neutral-600); font-family: monospace;">456.789.123-00</td>
-              <td style="color: var(--neutral-600);">(11) 77777-7777</td>
-              <td style="color: var(--neutral-600);">Belo Horizonte, MG</td>
-              <td><span class="client-status inactive">Inativo</span></td>
-              <td style="color: var(--neutral-600);">08/01/2024</td>
               <td style="text-align: center;">
                 <div class="dropdown">
                   <button type="button" class="action-btn dropdown-toggle" data-bs-toggle="dropdown">
                     <i data-lucide="more-horizontal" style="width: 16px; height: 16px;"></i>
                   </button>
-                  <div class="dropdown-menu">
+                  <div class="dropdown-menu dropdown-menu-start">
                     <a href="#" class="dropdown-item">
                       <i data-lucide="eye" style="width: 16px; height: 16px;"></i>
                       Visualizar
@@ -619,17 +624,32 @@
                       Editar
                     </a>
                     <a href="#" class="dropdown-item">
-                      <i data-lucide="file-text" style="width: 16px; height: 16px;"></i>
-                      Contratos
+                      <i data-lucide="printer" style="width: 16px; height: 16px;"></i>
+                      Imprimir
                     </a>
-                    <div class="dropdown-divider"></div>
                     <a href="#" class="dropdown-item text-danger">
-                      <i data-lucide="trash-2" style="width: 16px; height: 16px;"></i>
-                      Excluir
+                      <i data-lucide="x-circle" style="width: 16px; height: 16px;"></i>
+                      Cancelar
                     </a>
                   </div>
                 </div>
               </td>
+              <td>
+                <div>
+                  <div style="font-weight: 600; color: var(--neutral-900); margin-bottom: 2px;">#CON-2024-003</div>
+                  <div style="color: var(--neutral-500); font-size: 13px;">Contrato Novo</div>
+                </div>
+              </td>
+              <td>
+                <div>
+                  <div style="font-weight: 600; color: var(--neutral-900); margin-bottom: 2px;">Roberto Silva</div>
+                  <div style="color: var(--neutral-500); font-size: 13px;">456.789.123-00</div>
+                </div>
+              </td>
+              <td style="font-weight: 600; color: var(--neutral-900);">R$ 22.000,00</td>
+              <td style="color: var(--neutral-600);">36x R$ 611,11</td>
+              <td><span class="contract-status finalizado">Finalizado</span></td>
+              <td style="color: var(--neutral-600);">08/01/2024</td>
             </tr>
           </tbody>
         </table>
@@ -643,7 +663,7 @@
         <a href="#" class="pagination-btn">2</a>
         <a href="#" class="pagination-btn">3</a>
         <span style="color: var(--neutral-400); margin: 0 8px;">...</span>
-        <a href="#" class="pagination-btn">15</a>
+        <a href="#" class="pagination-btn">12</a>
         <a href="#" class="pagination-btn">
           <i data-lucide="chevron-right" style="width: 16px; height: 16px;"></i>
         </a>
@@ -652,9 +672,9 @@
   </div>
 </div>
 <script>
-  // Seleção em lote
+  // Seleção em lote para contratos
   document.getElementById('selectAll').addEventListener('change', function() {
-    const checkboxes = document.querySelectorAll('.client-checkbox');
+    const checkboxes = document.querySelectorAll('.contract-checkbox');
     const bulkActions = document.getElementById('bulkActions');
     const selectedCount = document.getElementById('selectedCount');
 
@@ -672,9 +692,9 @@
   });
 
   // Checkboxes individuais
-  document.querySelectorAll('.client-checkbox').forEach(checkbox => {
+  document.querySelectorAll('.contract-checkbox').forEach(checkbox => {
     checkbox.addEventListener('change', function() {
-      const checkedBoxes = document.querySelectorAll('.client-checkbox:checked');
+      const checkedBoxes = document.querySelectorAll('.contract-checkbox:checked');
       const bulkActions = document.getElementById('bulkActions');
       const selectedCount = document.getElementById('selectedCount');
       const selectAll = document.getElementById('selectAll');
@@ -687,7 +707,7 @@
         selectedCount.textContent = '0';
       }
 
-      selectAll.checked = checkedBoxes.length === document.querySelectorAll('.client-checkbox').length;
+      selectAll.checked = checkedBoxes.length === document.querySelectorAll('.contract-checkbox').length;
     });
   });
 </script>
