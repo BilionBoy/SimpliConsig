@@ -6,18 +6,18 @@ default: &default
 
 development:
   <<: *default
-  database: aguiarassessoria_development
-  username: dhiogoadmin
-  password: dhiegodhiego
+  database: simpliconsig_development
+  username: dhionuxconsignado
+  password: DhioRails1123581321345589
 
 test:
   <<: *default
-  database: aguiarassessoria_test
-  username: dhiogoadmin
-  password: dhiegodhiego
+  database: simpliconsig_test
+  username: dhionuxconsignado
+  password: DhioRails1123581321345589
 
 production:
   <<: *default
-  database: aguiarassessoria_production
-  username: dhiogoadmin
-  password: <%= ENV["AGUIARSSESSORIA_DATABASE_PASSWORD"] %>
+  database: simpliconsig_production
+  username: dhionuxconsignado
+  password: <%= ENV["SIMPLICONSIG_DATABASE_PASSWORD"] %>
