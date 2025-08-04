@@ -1,1 +1,20 @@
-<%%= render "form" %>
+<div class="modern-dashboard">
+  <!-- Header -->
+  <div class="page-header clients-header shadow-sm">
+    <div class="page-header-content d-lg-flex">
+      <div class="d-flex">
+        <div class="breadcrumb modern-breadcrumb py-3">
+          <a href="/" class="breadcrumb-item">
+            <i data-lucide="home" style="width: 16px; height: 16px;"></i>
+          </a>
+          <%%= link_to t("activerecord.models.#{<%= class_name %>.model_name.i18n_key}.other"), <%= plural_table_name %>_path, class: "breadcrumb-item" %>
+          <%%= link_to @<%= singular_table_name %>.id, <%= singular_table_name %>_path(@<%= singular_table_name %>), class: "breadcrumb-item" %>
+          <span class="breadcrumb-item active">Editar</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content" style="padding: 20px;">
+    <%%= render 'form', <%= singular_table_name %>: @<%= singular_table_name %> %>
+  </div>
+</div>

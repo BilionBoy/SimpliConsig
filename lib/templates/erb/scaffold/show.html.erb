@@ -1,27 +1,119 @@
-<div class="container">
-  <%%= render "shared/notice" %>
-  <div class="card border-0 shadow shadow-sm">
-    <div class="card-header border-0 d-flex justify-content-between">
-      <span class="fs-4">Visualizar <%= singular_table_name.titleize %></span>
-    </div>
-    <div class="card-body">
-      <div id="<%%= dom_id @<%= singular_table_name %> %>">
-        <%- attributes.each do |attribute| -%>
-          <p>
-            <strong><%= attribute.name.titleize %>:</strong>
-            <%%= @<%= singular_table_name %>.<%= attribute.name %> %>
-          </p>
-        <%- end -%>
+<div class="modern-dashboard">
+  <!-- Header -->
+  <div class="page-header clients-header shadow-sm">
+    <div class="page-header-content d-lg-flex">
+      <div class="d-flex">
+        <div class="breadcrumb modern-breadcrumb py-3">
+          <a href="/" class="breadcrumb-item">
+            <i data-lucide="home" style="width: 16px; height: 16px;"></i>
+          </a>
+          <%%= link_to t("activerecord.models.#{<%= class_name %>.model_name.i18n_key}.other"), <%= plural_table_name %>_path, class: "breadcrumb-item" %>
+          <span class="breadcrumb-item active">
+            <%% if @<%= singular_table_name %>.respond_to?(:nome) %>
+            <%%= truncate(@<%= singular_table_name %>.nome, length: 30) %>
+            <%% elsif @<%= singular_table_name %>.respond_to?(:title) %>
+            <%%= truncate(@<%= singular_table_name %>.title, length: 30) %>
+            <%% elsif @<%= singular_table_name %>.respond_to?(:name) %>
+            <%%= truncate(@<%= singular_table_name %>.name, length: 30) %>
+            <%% elsif @<%= singular_table_name %>.respond_to?(:descricao) %>
+            <%%= truncate(@<%= singular_table_name %>.descricao, length: 30) %>
+            <%% else %>
+            #<%%= @<%= singular_table_name %>.id %>
+            <%% end %>
+          </span>
+        </div>
       </div>
     </div>
-    <div class="card-footer border-0 d-flex justify-content-between">
-      <div>
-        <%%= link_to edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), class: "btn btn-primary" do %>
-        <i class="bi bi-pencil-square"></i> Editar
-        <%% end %>
-        <%%= link_to "Voltar", <%= plural_table_name %>_path, class: "btn btn-secondary" %>
+  </div>
+  <div class="content" style="padding: 20px;">
+    <div class="client-details">
+      <!-- Header do Cliente -->
+      <div class="client-header">
+        <div class="client-title">
+          <i data-lucide="file-text" style="width: 24px; height: 24px; color: var(--primary-blue);"></i>
+          <h1>
+            <%% if @<%= singular_table_name %>.respond_to?(:nome) %>
+            <%%= @<%= singular_table_name %>.nome %>
+            <%% elsif @<%= singular_table_name %>.respond_to?(:title) %>
+            <%%= @<%= singular_table_name %>.title %>
+            <%% elsif @<%= singular_table_name %>.respond_to?(:name) %>
+            <%%= @<%= singular_table_name %>.name %>
+            <%% elsif @<%= singular_table_name %>.respond_to?(:descricao) %>
+            <%%= @<%= singular_table_name %>.descricao %>
+            <%% else %>
+            <%%= t("activerecord.models.#{<%= class_name %>.model_name.i18n_key}.one") %> #<%%= @<%= singular_table_name %>.id %>
+            <%% end %>
+          </h1>
+        </div>
+        <div class="client-status">
+          <%% if @<%= singular_table_name %>.respond_to?(:ativo) %>
+          <span class="status-badge <%%= @<%= singular_table_name %>.ativo? ? 'active' : 'inactive' %>">
+            <%%= @<%= singular_table_name %>.ativo? ? 'Ativo' : 'Inativo' %>
+          </span>
+          <%% end %>
+          <div class="client-actions">
+            <%%= link_to edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), class: "modern-btn modern-btn-warning" do %>
+            <i data-lucide="edit" style="width: 14px; height: 14px;"></i>
+            Editar
+            <%% end %>
+            <%%= link_to <%= plural_table_name %>_path, class: "modern-btn modern-btn-outline" do %>
+            <i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i>
+            Voltar
+            <%% end %>
+          </div>
+        </div>
       </div>
-      <%%= button_to "Deletar", @<%= singular_table_name %>, method: :delete, class: "btn btn-outline-danger border-0" %>
+      <!-- Conteúdo do Cliente -->
+      <div class="client-content">
+        <div class="info-grid">
+          <!-- Informações -->
+          <div class="info-section">
+            <h3 class="info-section-title">
+              <i data-lucide="info" style="width: 18px; height: 18px;"></i>
+              Informações
+            </h3>
+            <% attributes_to_ignore = ['deleted_at', 'original_user_create', 'last_user_update', 'created_by', 'updated_by', 'id'] %>
+            <%- attributes.each do |attribute| -%>
+              <% unless attributes_to_ignore.include?(attribute.name) %>
+                <div class="info-item">
+                  <span class="info-label"><%%= t("activerecord.attributes.<%= singular_table_name %>.<%= attribute.name %>") %>:</span>
+                  <span class="info-value <%%= @<%= singular_table_name %>.<%= attribute.name %>.blank? ? 'empty' : '' %>">
+                    <% if attribute.type == :boolean %>
+                      <%% if @<%= singular_table_name %>.<%= attribute.name %> %>
+                      <span class="status-badge active">Sim</span>
+                      <%% else %>
+                      <span class="status-badge inactive">Não</span>
+                      <%% end %>
+                    <% elsif attribute.type == :date %>
+                      <%%= @<%= singular_table_name %>.<%= attribute.name %>&.strftime('%d/%m/%Y') %>
+                    <% elsif attribute.type == :datetime %>
+                      <%%= @<%= singular_table_name %>.<%= attribute.name %>&.strftime('%d/%m/%Y às %H:%M') %>
+                    <% elsif attribute.type == :decimal || attribute.type == :float %>
+                      <%%= number_to_currency(@<%= singular_table_name %>.<%= attribute.name %>) if @<%= singular_table_name %>.<%= attribute.name %> %>
+                    <% elsif attribute.type == :text %>
+                      <%%= simple_format(@<%= singular_table_name %>.<%= attribute.name %>) if @<%= singular_table_name %>.<%= attribute.name %>.present? %>
+                    <% elsif attribute.reference? %>
+                      <%%= @<%= singular_table_name %>.<%= attribute.name %> %>
+                    <% else %>
+                      <%%= @<%= singular_table_name %>.<%= attribute.name %>.present? ? @<%= singular_table_name %>.<%= attribute.name %> : 'Não informado' %>
+                    <% end %>
+                  </span>
+                </div>
+              <% end %>
+            <%- end -%>
+            <div class="info-item">
+              <span class="info-label">Criado em:</span>
+              <span class="info-value"><%%= @<%= singular_table_name %>.created_at.strftime('%d/%m/%Y às %H:%M') %></span>
+            </div>
+            <%% if @<%= singular_table_name %>.updated_at != @<%= singular_table_name %>.created_at %>
+            <div class="info-item">
+              <span class="info-label">Atualizado em:</span>
+              <span class="info-value"><%%= @<%= singular_table_name %>.updated_at.strftime('%d/%m/%Y às %H:%M') %></span>
+            </div>
+            <%% end %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

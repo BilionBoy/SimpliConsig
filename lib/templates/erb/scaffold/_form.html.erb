@@ -1,32 +1,285 @@
-<%# frozen_string_literal: true %>
-<%%= render "shared/context_nav", title: t("activerecord.models.#{<%= class_name %>.model_name.i18n_key}.other") do  %>
-<span class="breadcrumb-item"><%%= link_to t("activerecord.models.#{<%= class_name %>.model_name.i18n_key}.other"), <%= plural_table_name %>_path, class: "text-dark" %></span>
-<span class="breadcrumb-item active"><%%= t("helpers.submit.#{params[:action]}") %></span>
-<%% end %>
 <%%= simple_form_for(@<%= singular_table_name %>) do |f| %>
-<div class="card">
-  <div class="card-header">
-    <h5 class="my-0">
-      <%%= @<%= singular_table_name %>.new_record? ? "Incluir " : "Editar " %><%%= t("activerecord.models.#{<%= class_name %>.model_name.i18n_key}.one") %>
-    </h5>
-  </div>
-  <div class="card-body">
-    <%%= f.error_notification %>
-    <%%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-    <div class="row">
-      <% attributes_to_ignore = ['deleted_at', 'original_user_create', 'last_user_update', 'created_by', 'updated_by'] %>
-      <%- attributes.each do |attribute| -%>
-        <% unless attributes_to_ignore.include?(attribute.name) %>
-          <div class="col-12">
-            <%%= f.<%= attribute.reference? ? :association : :input %> :<%= attribute.name %>, input_html: { class: "capitalize"}, placeholder: "<%= attribute.name.humanize %>"  %>
-          </div>
-        <% end %>
-      <%- end -%>
+<div class="form-wizard">
+  <!-- Header do Wizard -->
+  <div class="wizard-header">
+    <div class="wizard-steps">
+      <div class="wizard-step active">
+        <div class="step-number">1</div>
+        <span>Informações Principais</span>
+      </div>
+      <div class="wizard-step">
+        <div class="step-number">2</div>
+        <span>Detalhes</span>
+      </div>
+      <div class="wizard-step">
+        <div class="step-number">3</div>
+        <span>Configurações</span>
+      </div>
+    </div>
+    <div class="wizard-progress">
+      <div class="wizard-progress-bar"></div>
     </div>
   </div>
-  <div class="card-footer">
-    <%%= btn_submit(f) %>
-    <%%= link_to "Voltar", <%= plural_table_name %>_path, class: "btn btn-light" %>
-  </div>
-</div>
-<%% end %>
+  <!-- Conteúdo do Formulário -->
+  <div class="wizard-content">
+    <%%= f.error_notification %>
+    <%%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+    <%% 
+        # Obter atributos do modelo dinamicamente
+        model_attributes = @<%= singular_table_name %>.class.columns.reject do |col|
+    ['id', 'created_at', 'updated_at', 'deleted_at', 'original_user_create', 'last_user_update', 'created_by', 'updated_by'].include?(col.name)
+    end
+    # Separar atributos por tipo para as etapas
+    main_attributes = model_attributes.select do |attr|
+    ![:boolean, :text].include?(attr.type) && !attr.name.end_with?('_at')
+    end
+    text_attributes = model_attributes.select { |attr| attr.type == :text }
+    date_attributes = model_attributes.select do |attr|
+    attr.name.end_with?('_at') && !['created_at', 'updated_at'].include?(attr.name)
+    end
+    boolean_attributes = model_attributes.select { |attr| attr.type == :boolean }
+    %>
+    <!-- Etapa 1: Informações Principais -->
+    <div class="wizard-step-content active" id="step1">
+      <%% unless main_attributes.empty? %>
+      <div class="form-section">
+        <h3 class="section-title">
+          <i data-lucide="edit" style="width: 18px; height: 18px;"></i>
+          Informações Principais
+        </h3>
+        <div class="form-row">
+          <%% main_attributes.each do |attribute| %>
+            <div class="form-group">
+              <%% case attribute.type %>
+              <%% when :integer %>
+              <%% if attribute.name.end_with?('_id') %>
+              <%% association_name = attribute.name.gsub('_id', '') %>
+              <%% if @<%= singular_table_name %>.class.reflect_on_association(association_name.to_sym) %>
+              <%%= f.association association_name.to_sym, 
+                            input_html: { class: "form-select" }, 
+                            label_html: { class: "form-label" } %>
+              <%% else %>
+              <%%= f.input attribute.name.to_sym, 
+                            input_html: { class: "form-input" }, 
+                            label_html: { class: "form-label" } %>
+              <%% end %>
+              <%% else %>
+              <%%= f.input attribute.name.to_sym, 
+                          input_html: { class: "form-input" }, 
+                          label_html: { class: "form-label" } %>
+              <%% end %>
+              <%% when :decimal, :float %>
+              <%%= f.input attribute.name.to_sym, 
+                        input_html: { class: "form-input" }, 
+                        label_html: { class: "form-label" },
+                        placeholder: "R$ 0,00" %>
+              <%% when :date %>
+              <%%= f.input attribute.name.to_sym, 
+                        as: :date,
+                        input_html: { class: "form-input" }, 
+                        label_html: { class: "form-label" } %>
+              <%% when :datetime %>
+              <%%= f.input attribute.name.to_sym, 
+                        as: :datetime_local,
+                        input_html: { class: "form-input" }, 
+                        label_html: { class: "form-label" } %>
+              <%% else %>
+              <%%= f.input attribute.name.to_sym, 
+                        input_html: { class: "form-input" }, 
+                        label_html: { class: "form-label" } %>
+              <%% end %>
+            </div>
+            <%% end %>
+          </div>
+        </div>
+        <%% else %>
+        <div class="form-section">
+          <h3 class="section-title">
+            <i data-lucide="edit" style="width: 18px; height: 18px;"></i>
+            Informações Principais
+          </h3>
+          <div class="form-row">
+            <div class="form-group">
+              <p style="color: var(--neutral-500); text-align: center; padding: 40px;">
+                Nenhum campo principal disponível para esta etapa.
+              </p>
+            </div>
+          </div>
+        </div>
+        <%% end %>
+      </div>
+      <!-- Etapa 2: Detalhes -->
+      <div class="wizard-step-content" id="step2" style="display: none;">
+        <%% unless text_attributes.empty? && date_attributes.empty? %>
+        <div class="form-section">
+          <h3 class="section-title">
+            <i data-lucide="file-text" style="width: 18px; height: 18px;"></i>
+            Detalhes Adicionais
+          </h3>
+          <%% unless text_attributes.empty? %>
+          <div class="form-row">
+            <%% text_attributes.each do |attribute| %>
+              <div class="form-group">
+                <%%= f.input attribute.name.to_sym, 
+                        as: :text, 
+                        input_html: { class: "form-textarea", rows: 4 }, 
+                        label_html: { class: "form-label" } %>
+              </div>
+              <%% end %>
+            </div>
+            <%% end %>
+            <%% unless date_attributes.empty? %>
+            <div class="form-row">
+              <%% date_attributes.each do |attribute| %>
+                <div class="form-group">
+                  <%% if attribute.type == :datetime %>
+                  <%%= f.input attribute.name.to_sym, 
+                          as: :datetime_local,
+                          input_html: { class: "form-input" }, 
+                          label_html: { class: "form-label" } %>
+                  <%% else %>
+                  <%%= f.input attribute.name.to_sym, 
+                          as: :date,
+                          input_html: { class: "form-input" }, 
+                          label_html: { class: "form-label" } %>
+                  <%% end %>
+                </div>
+                <%% end %>
+              </div>
+              <%% end %>
+            </div>
+            <%% else %>
+            <div class="form-section">
+              <h3 class="section-title">
+                <i data-lucide="file-text" style="width: 18px; height: 18px;"></i>
+                Detalhes Adicionais
+              </h3>
+              <div class="form-row">
+                <div class="form-group">
+                  <p style="color: var(--neutral-500); text-align: center; padding: 40px;">
+                    Nenhum campo adicional disponível para esta etapa.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <%% end %>
+          </div>
+          <!-- Etapa 3: Configurações -->
+          <div class="wizard-step-content" id="step3" style="display: none;">
+            <div class="form-section">
+              <h3 class="section-title">
+                <i data-lucide="settings" style="width: 18px; height: 18px;"></i>
+                Configurações
+              </h3>
+              <%% unless boolean_attributes.empty? %>
+              <div class="form-row">
+                <%% boolean_attributes.each do |attribute| %>
+                  <div class="form-group">
+                    <%%= f.input attribute.name.to_sym, 
+                      as: :boolean, 
+                      input_html: { class: "form-check-input" },
+                      label_html: { class: "form-label" } %>
+                  </div>
+                  <%% end %>
+                </div>
+                <%% else %>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label">Status</label>
+                    <%% if @<%= singular_table_name %>.respond_to?(:ativo) %>
+                    <%%= f.input :ativo, 
+                      as: :boolean, 
+                      input_html: { class: "form-check-input" },
+                      label_html: { class: "form-label" } %>
+                    <%% else %>
+                    <select class="form-select" name="<%= singular_table_name %>[status]">
+                      <option value="ativo" <%%= 'selected' if @<%= singular_table_name %>.respond_to?(:status) && @<%= singular_table_name %>.status == 'ativo' %>>Ativo</option>
+                      <option value="inativo" <%%= 'selected' if @<%= singular_table_name %>.respond_to?(:status) && @<%= singular_table_name %>.status == 'inativo' %>>Inativo</option>
+                    </select>
+                    <%% end %>
+                  </div>
+                </div>
+                <%% end %>
+              </div>
+            </div>
+          </div>
+          <!-- Ações do Wizard -->
+          <div class="wizard-actions">
+            <div class="btn-group">
+              <button type="button" class="modern-btn modern-btn-outline" id="prevBtn" style="display: none;">
+                <i data-lucide="chevron-left" style="width: 14px; height: 14px;"></i>
+                Anterior
+              </button>
+            </div>
+            <div class="btn-group">
+              <%% if @<%= singular_table_name %>.persisted? %>
+              <%%= link_to <%= singular_table_name %>_path(@<%= singular_table_name %>), class: "modern-btn modern-btn-outline" do %>
+              <i data-lucide="x" style="width: 14px; height: 14px;"></i>
+              Cancelar
+              <%% end %>
+              <%% else %>
+              <%%= link_to <%= plural_table_name %>_path, class: "modern-btn modern-btn-outline" do %>
+              <i data-lucide="x" style="width: 14px; height: 14px;"></i>
+              Cancelar
+              <%% end %>
+              <%% end %>
+              <button type="button" class="modern-btn modern-btn-primary" id="nextBtn">
+                Próximo
+                <i data-lucide="chevron-right" style="width: 14px; height: 14px;"></i>
+              </button>
+              <button type="submit" class="modern-btn modern-btn-success" id="submitBtn" style="display: none;">
+                <i data-lucide="save" style="width: 14px; height: 14px;"></i>
+                <%%= @<%= singular_table_name %>.new_record? ? 'Criar' : 'Salvar' %> 
+                <%%= @<%= singular_table_name %>.class.model_name.human %>
+              </button>
+            </div>
+          </div>
+        </div>
+        <script>
+          let currentStep = 1;
+          const totalSteps = 3;
+
+          function showStep(step) {
+            // Esconder todas as etapas
+            document.querySelectorAll('.wizard-step-content').forEach(content => {
+              content.style.display = 'none';
+            });
+
+            // Mostrar etapa atual
+            document.getElementById(`step${step}`).style.display = 'block';
+
+            // Atualizar indicadores visuais
+            document.querySelectorAll('.wizard-step').forEach((stepEl, index) => {
+              stepEl.classList.remove('active', 'completed');
+              if (index + 1 < step) {
+                stepEl.classList.add('completed');
+              } else if (index + 1 === step) {
+                stepEl.classList.add('active');
+              }
+            });
+
+            // Atualizar barra de progresso
+            const progress = ((step - 1) / (totalSteps - 1)) * 100;
+            document.querySelector('.wizard-progress-bar').style.width = `${progress}%`;
+
+            // Controlar botões
+            document.getElementById('prevBtn').style.display = step > 1 ? 'flex' : 'none';
+            document.getElementById('nextBtn').style.display = step < totalSteps ? 'flex' : 'none';
+            document.getElementById('submitBtn').style.display = step === totalSteps ? 'flex' : 'none';
+          }
+
+          document.getElementById('nextBtn').addEventListener('click', () => {
+            if (currentStep < totalSteps) {
+              currentStep++;
+              showStep(currentStep);
+            }
+          });
+
+          document.getElementById('prevBtn').addEventListener('click', () => {
+            if (currentStep > 1) {
+              currentStep--;
+              showStep(currentStep);
+            }
+          });
+        </script>
+        <%% end %>
