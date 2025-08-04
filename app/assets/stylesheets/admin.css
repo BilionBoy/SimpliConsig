@@ -31,6 +31,23 @@
   --border-radius-lg: 16px;
   --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+.btn-primary {
+  background: var(--primary-blue);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(30, 64, 175, 0.2);
+}
 /* SIDEBAR */
 .custom-sidebar {
   background-color: #093370;
@@ -176,7 +193,11 @@
 }
 
 .modern-header {
-  background-color: #053769;
+  background: linear-gradient(
+    135deg,
+    var(--primary-blue) 0%,
+    var(--primary-blue-dark) 100%
+  );
   border: none;
   box-shadow: var(--shadow-lg);
   position: relative;
