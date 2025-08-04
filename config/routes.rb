@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get 'admin/new'
   get 'admin/clientes'
   get 'admin/contratos'
+  get 'admin/show'
+  get 'admin/edit'
   get 'home/index'
 
   # Rotas Scaffold

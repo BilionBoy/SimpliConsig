@@ -10,4 +10,10 @@ class AdminController < ApplicationController
 
   def contratos
   end
+
+  def show
+  end
+
+  def edit
+  end
 end

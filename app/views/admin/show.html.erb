@@ -1,0 +1,501 @@
+<style>
+  :root {
+    --primary-blue: #1e40af;
+    --primary-blue-dark: #1d4ed8;
+    --accent-orange: #f59e0b;
+    --success: #10b981;
+    --error: #ef4444;
+    --warning: #f59e0b;
+    --neutral-25: #fafafa;
+    --neutral-50: #f9fafb;
+    --neutral-100: #f3f4f6;
+    --neutral-200: #e5e7eb;
+    --neutral-300: #d1d5db;
+    --neutral-400: #9ca3af;
+    --neutral-500: #6b7280;
+    --neutral-600: #4b5563;
+    --neutral-700: #374151;
+    --neutral-900: #111827;
+    --border-radius-lg: 12px;
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  .client-details {
+    background: white;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--neutral-200);
+    overflow: hidden;
+    height: calc(100vh - 140px);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .client-header {
+    background: var(--neutral-50);
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--neutral-200);
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .client-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .client-title h1 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--neutral-900);
+    margin: 0;
+  }
+
+  .client-status {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .status-badge.active {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success);
+  }
+
+  .status-badge.inactive {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--error);
+  }
+
+  .client-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .client-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+    min-height: 0;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+
+  .info-section {
+    background: var(--neutral-25);
+    border: 1px solid var(--neutral-200);
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  .info-section-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--neutral-900);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--neutral-200);
+  }
+
+  .info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--neutral-100);
+  }
+
+  .info-item:last-child {
+    border-bottom: none;
+  }
+
+  .info-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--neutral-600);
+    min-width: 120px;
+  }
+
+  .info-value {
+    font-size: 13px;
+    color: var(--neutral-900);
+    text-align: right;
+    flex: 1;
+    word-break: break-word;
+  }
+
+  .info-value.empty {
+    color: var(--neutral-400);
+    font-style: italic;
+  }
+
+  .documents-section {
+    background: var(--neutral-25);
+    border: 1px solid var(--neutral-200);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 24px;
+  }
+
+  .documents-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .document-item {
+    background: white;
+    border: 1px solid var(--neutral-200);
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .document-item:hover {
+    border-color: var(--primary-blue);
+    box-shadow: 0 2px 8px rgba(30, 64, 175, 0.1);
+  }
+
+  .document-icon {
+    width: 32px;
+    height: 32px;
+    margin: 0 auto 8px;
+    color: var(--primary-blue);
+  }
+
+  .document-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--neutral-700);
+    margin-bottom: 4px;
+  }
+
+  .document-status {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 500;
+  }
+
+  .document-status.uploaded {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success);
+  }
+
+  .document-status.missing {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--error);
+  }
+
+  .modern-btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 13px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+  }
+
+  .modern-btn-outline {
+    background: white;
+    color: var(--neutral-600);
+    border: 1.5px solid var(--neutral-300);
+  }
+
+  .modern-btn-outline:hover {
+    background: var(--neutral-100);
+    color: var(--neutral-700);
+    border-color: var(--neutral-400);
+  }
+
+  .modern-btn-primary {
+    background: var(--primary-blue);
+    color: white;
+    box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+  }
+
+  .modern-btn-primary:hover {
+    background: var(--primary-blue-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(30, 64, 175, 0.4);
+  }
+
+  .modern-btn-warning {
+    background: var(--warning);
+    color: white;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+  }
+
+  .modern-btn-warning:hover {
+    background: #d97706;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+  }
+
+  .modern-btn-danger {
+    background: var(--error);
+    color: white;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+  }
+
+  .modern-btn-danger:hover {
+    background: #dc2626;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+  }
+
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .client-details {
+      height: calc(100vh - 120px);
+    }
+
+    .client-header {
+      flex-direction: column;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .client-actions {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .info-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .client-content {
+      padding: 16px;
+    }
+
+    .info-item {
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .info-label {
+      min-width: auto;
+    }
+
+    .info-value {
+      text-align: left;
+    }
+  }
+</style>
+<div class="modern-dashboard">
+  <!-- Header -->
+  <div class="page-header clients-header shadow-sm">
+    <div class="page-header-content d-lg-flex">
+      <div class="d-flex">
+        <div class="breadcrumb modern-breadcrumb py-3">
+          <a href="<%= root_path %>" class="breadcrumb-item">
+            <i data-lucide="home" style="width: 16px; height: 16px;"></i>
+          </a>
+          <a href="<%= clients_path %>" class="breadcrumb-item">Clientes</a>
+          <span class="breadcrumb-item active"><%= @client.nome_completo %></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content" style="padding: 20px;">
+    <div class="client-details">
+      <!-- Header do Cliente -->
+      <div class="client-header">
+        <div class="client-title">
+          <i data-lucide="user" style="width: 24px; height: 24px; color: var(--primary-blue);"></i>
+          <h1><%= @client.nome_completo %></h1>
+        </div>
+        <div class="client-status">
+          <span class="status-badge <%= @client.ativo? ? 'active' : 'inactive' %>">
+            <%= @client.ativo? ? 'Ativo' : 'Inativo' %>
+          </span>
+          <div class="client-actions">
+            <a href="<%= edit_client_path(@client) %>" class="modern-btn modern-btn-warning">
+              <i data-lucide="edit" style="width: 14px; height: 14px;"></i>
+              Editar
+            </a>
+            <a href="<%= clients_path %>" class="modern-btn modern-btn-outline">
+              <i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i>
+              Voltar
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- Conteúdo do Cliente -->
+      <div class="client-content">
+        <div class="info-grid">
+          <!-- Informações Pessoais -->
+          <div class="info-section">
+            <h3 class="info-section-title">
+              <i data-lucide="user" style="width: 18px; height: 18px;"></i>
+              Informações Pessoais
+            </h3>
+            <div class="info-item">
+              <span class="info-label">Nome Completo:</span>
+              <span class="info-value"><%= @client.nome_completo %></span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Nome Social:</span>
+              <span class="info-value <%= @client.nome_social.blank? ? 'empty' : '' %>">
+                <%= @client.nome_social.present? ? @client.nome_social : 'Não informado' %>
+              </span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Data de Nascimento:</span>
+              <span class="info-value">
+                <%= @client.data_nascimento.present? ? @client.data_nascimento.strftime('%d/%m/%Y') : 'Não informado' %>
+              </span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Sexo:</span>
+              <span class="info-value">
+                <%= @client.sexo == 'M' ? 'Masculino' : (@client.sexo == 'F' ? 'Feminino' : 'Não informado') %>
+              </span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Alfabetizado:</span>
+              <span class="info-value">
+                <%= @client.alfabetizado == 'sim' ? 'Sim' : (@client.alfabetizado == 'nao' ? 'Não' : 'Não informado') %>
+              </span>
+            </div>
+          </div>
+          <!-- Contato -->
+          <div class="info-section">
+            <h3 class="info-section-title">
+              <i data-lucide="phone" style="width: 18px; height: 18px;"></i>
+              Contato
+            </h3>
+            <div class="info-item">
+              <span class="info-label">Telefone:</span>
+              <span class="info-value">
+                <%= @client.telefone.present? ? @client.telefone : 'Não informado' %>
+              </span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Email:</span>
+              <span class="info-value">
+                <%= @client.email.present? ? @client.email : 'Não informado' %>
+              </span>
+            </div>
+          </div>
+          <!-- Endereço -->
+          <div class="info-section">
+            <h3 class="info-section-title">
+              <i data-lucide="map-pin" style="width: 18px; height: 18px;"></i>
+              Endereço
+            </h3>
+            <div class="info-item">
+              <span class="info-label">Endereço:</span>
+              <span class="info-value <%= @client.endereco.blank? ? 'empty' : '' %>">
+                <%= @client.endereco.present? ? @client.endereco : 'Não informado' %>
+              </span>
+            </div>
+          </div>
+          <!-- Informações Funcionais -->
+          <div class="info-section">
+            <h3 class="info-section-title">
+              <i data-lucide="briefcase" style="width: 18px; height: 18px;"></i>
+              Informações Funcionais
+            </h3>
+            <div class="info-item">
+              <span class="info-label">Órgão:</span>
+              <span class="info-value">
+                <%= @client.orgao.present? ? @client.orgao.titleize : 'Não informado' %>
+              </span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Matrícula:</span>
+              <span class="info-value">
+                <%= @client.matricula.present? ? @client.matricula : 'Não informado' %>
+              </span>
+            </div>
+            <% if @client.orgao == 'estado' %>
+              <div class="info-item">
+                <span class="info-label">Ano de Admissão:</span>
+                <span class="info-value">
+                  <%= @client.ano_admissao.present? ? @client.ano_admissao : 'Não informado' %>
+                </span>
+              </div>
+            <% elsif @client.orgao == 'inss' %>
+              <div class="info-item">
+                <span class="info-label">Tipo de Benefício:</span>
+                <span class="info-value">
+                  <%= @client.tipo_beneficio.present? ? @client.tipo_beneficio.titleize : 'Não informado' %>
+                </span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Representante Legal:</span>
+                <span class="info-value">
+                  <%= @client.representante_legal == 'sim' ? 'Sim' : (@client.representante_legal == 'nao' ? 'Não' : 'Não informado') %>
+                </span>
+              </div>
+            <% end %>
+            <div class="info-item">
+              <span class="info-label">Última Margem:</span>
+              <span class="info-value">
+                <%= @client.ultima_margem.present? ? number_to_currency(@client.ultima_margem) : 'Não informado' %>
+              </span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Tipo de Margem:</span>
+              <span class="info-value">
+                <%= @client.tipo_margem.present? ? @client.tipo_margem.humanize : 'Não informado' %>
+              </span>
+            </div>
+          </div>
+        </div>
+        <!-- Documentos -->
+        <div class="documents-section">
+          <h3 class="info-section-title">
+            <i data-lucide="file-text" style="width: 18px; height: 18px;"></i>
+            Documentos
+          </h3>
+          <div class="documents-grid">
+            <div class="document-item">
+              <i data-lucide="file-image" class="document-icon"></i>
+              <div class="document-name">RG (Frente)</div>
+              <span class="document-status <%= @client.rg_frente.present? ? 'uploaded' : 'missing' %>">
+                <%= @client.rg_frente.present? ? 'Enviado' : 'Pendente' %>
+              </span>
+            </div>
+            <div class="document-item">
+              <i data-lucide="file-image" class="document-icon"></i>
+              <div class="document-name">RG (Verso)</div>
+              <span class="document-status <%= @client.rg_verso.present? ? 'uploaded' : 'missing' %>">
+                <%= @client.rg_verso.present? ? 'Enviado' : 'Pendente' %>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
